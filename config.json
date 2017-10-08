@@ -1,0 +1,19 @@
+{
+  "name": "Core",
+  "alias": "core",
+  "version": "0.0.1",
+  "description": "",
+  "keywords": [],
+  "enable": true,
+  "order": 0,
+  "providers": [
+    "Zix\\Core\\Providers\\CoreServiceProvider",
+    "Zix\\Core\\Providers\\ConsoleServiceProvider"
+  ],
+  "aliases": [
+
+  ],
+  "files": [
+    "helpers.php"
+  ]
+}
