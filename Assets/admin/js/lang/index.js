@@ -10,7 +10,7 @@ const messages = {
     }
 }
 
-const LOCAL_LANG = 'en'
+const LOCAL_LANG = 'en';
 
 const i18n = new VueI18n({
     locale: LOCAL_LANG, // set locale
@@ -18,8 +18,8 @@ const i18n = new VueI18n({
     messages // set locale messages
 })
 
-axios.post('/api/lang/set-admin', {lang: LOCAL_LANG})
-    .then(response => {
-        i18n.setLocaleMessage(LOCAL_LANG, response.data.trans)
-    })
+// axios.post('/api/lang/set-admin', {lang: LOCAL_LANG})
+//     .then(response => {
+//         i18n.setLocaleMessage(LOCAL_LANG, response.data.trans)
+//     })
 export default i18n;

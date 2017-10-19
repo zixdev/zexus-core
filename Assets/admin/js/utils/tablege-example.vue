@@ -22,7 +22,7 @@
                 class="elevation-1"
                 >
 
-            <template slot="items" scope="props">
+            <template slot="items" slot-scope="props">
                 <td>{{ props.item.id }}</td>
                 <td class="text-xs-right">{{ props.item.username }}</td>
                 <td class="text-xs-right">{{ props.item.email }}</td>

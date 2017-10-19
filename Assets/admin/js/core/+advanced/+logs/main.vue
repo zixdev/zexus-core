@@ -17,12 +17,12 @@
                 v-bind:search="search"
                 v-bind:pagination.sync="pagination"
                 >
-            <template slot="headers" scope="props">
+            <template slot="headers" slot-scope="props">
         <span v-tooltip:bottom="{ 'html': props.item.text }">
           {{ props.item.text }}
         </span>
             </template>
-            <template slot="items" scope="props">
+            <template slot="items" slot-scope="props">
                 <td>{{ props.item.date }}</td>
                 <td class="text-xs-right">
                     <v-icon :class="props.item.level_img+'--text'" dark>{{ props.item.level_img}} </v-icon>

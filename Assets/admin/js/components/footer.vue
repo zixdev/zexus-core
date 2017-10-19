@@ -1,5 +1,5 @@
 <template>
-    <v-footer class="l-footer elevation-N primary darken-1">
+    <v-footer class="l-footer elevation-1" app>
         <v-container fluid>
             <v-layout class="l-footer__copy_write">
                 <v-flex md6 v-html="rights"></v-flex>

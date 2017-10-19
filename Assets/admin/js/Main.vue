@@ -3,11 +3,13 @@
         <app-side-bar></app-side-bar>
         <app-header></app-header>
         <main>
-            <v-container fluid class="l-main" :style="{'min-height': windowHeight}">
-                <transition name="fade" mode="out-in">
-                    <router-view></router-view>
-                </transition>
-            </v-container>
+            <v-content>
+                <v-container fluid fill-height class="l-main">
+                    <transition name="fade" mode="out-in">
+                        <router-view></router-view>
+                    </transition>
+                </v-container>
+            </v-content>
         </main>
         <app-snack-bar></app-snack-bar>
         <app-footer></app-footer>
@@ -29,9 +31,6 @@
 
         }
 
-        get windowHeight() {
-            return ($(window).height() - 170) + 'px';
-        }
 
 
     }

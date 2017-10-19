@@ -30,7 +30,7 @@
                 class="elevation-1"
                 >
 
-            <template slot="items" scope="props">
+            <template slot="items" slot-scope="props">
                 <td v-for="header in headers" :class="{'text-xs-right': !header.left}">{{ props.item[header.value] }}</td>
 
                 <td v-if="eloquent_status == 'active'">
