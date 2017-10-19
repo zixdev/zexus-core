@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import './boot';
 import MainApp from './Main.vue';
 import { sync } from 'vuex-router-sync';
 
