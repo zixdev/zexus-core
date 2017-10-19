@@ -1,12 +1,12 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 //import beforeEach from './beforeEach'
-import  app  from '../core'
+// import  app  from '../core'
 
 Vue.use(Router)
 
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Spread_operator
-const routes = [...app]
+const routes = [...Zexus.routes];
 
 function createRoutesFromMenu(routes) {
     let newRoutes = [];
@@ -28,7 +28,7 @@ function createRoutesFromMenu(routes) {
 
     return newRoutes;
 }
-
+console.log('=======+>', routes);
 const router = new Router({
     routes: [...createRoutesFromMenu(routes)],
     linkActiveClass: 'active',

@@ -44,7 +44,6 @@
 <script type="text/babel">
     import Vue from 'vue';
     import Component from 'vue-class-component';
-    import routes from '../core';
     import { mapGetters } from 'vuex';
 
     @Component({
@@ -53,7 +52,7 @@
     export default class Sidebar extends Vue {
 
         get router() {
-            return this.valid(routes)
+            return this.valid(Zexus.routes)
         }
         get _sidebar() {
             return this.sidebar;
