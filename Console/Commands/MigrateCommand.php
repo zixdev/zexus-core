@@ -2,7 +2,6 @@
 
 namespace Zix\Core\Console\Commands;
 
-use Illuminate\Console\GeneratorCommand;
 use Illuminate\Database\Console\Migrations\BaseCommand;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputOption;

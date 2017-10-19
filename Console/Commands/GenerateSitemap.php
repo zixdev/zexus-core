@@ -3,7 +3,7 @@
 namespace Zix\Core\Console\Commands;
 
 use Illuminate\Console\GeneratorCommand;
-use Zix\Core\Events\Seo\GenerateSitemap as GenerateSitemapEvent;
+//use Zix\Core\Events\Seo\GenerateSitemap as GenerateSitemapEvent;
 
 class GenerateSitemap extends GeneratorCommand
 {
@@ -33,7 +33,7 @@ class GenerateSitemap extends GeneratorCommand
 		$this->info('--------------------------------------------');
 		$this->info('| Generating SiteMaps                       |');
 		$this->info('--------------------------------------------');
-		event(new GenerateSitemapEvent());
+//		event(new GenerateSitemapEvent());
 	}
 
 	/**
