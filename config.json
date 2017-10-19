@@ -8,7 +8,9 @@
   "order": 0,
   "providers": [
     "Zix\\Core\\Providers\\CoreServiceProvider",
-    "Zix\\Core\\Providers\\ConsoleServiceProvider"
+    "Zix\\Core\\Providers\\ConsoleServiceProvider",
+    "Zix\\Core\\Providers\\AssetsServiceProvider",
+    "Zix\\Core\\Providers\\RouteServiceProvider"
   ],
   "aliases": [
 
