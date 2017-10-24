@@ -4,7 +4,7 @@
         <app-header></app-header>
         <main>
             <v-content>
-                <v-container fluid fill-height class="l-main">
+                <v-container fluid  class="l-main">
                     <transition name="fade" mode="out-in">
                         <router-view></router-view>
                     </transition>
