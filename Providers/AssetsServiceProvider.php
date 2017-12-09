@@ -27,9 +27,10 @@ class AssetsServiceProvider extends ServiceProvider
      */
     public function registerViews()
     {
+        // @TODO:: check if this are correct path
         $viewPath = base_path('views/modules/core');
 
-        $sourcePath = __DIR__ . '/../Assets/views';
+        $sourcePath = __DIR__ . '/../Assets';
 
         $this->publishes([
             $sourcePath => $viewPath
