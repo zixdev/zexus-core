@@ -28,8 +28,8 @@
 </head>
 <body>
 <div id="zix-app"></div>
-    <h2>Zix App</h2>
+    <div id="example"></div>
 <!-- Scripts -->
-{{--<script src="{{ mix('assets/admin/js/admin.js') }}"></script>--}}
+<script src="{{ mix('js/main.js') }}"></script>
 </body>
 </html>
