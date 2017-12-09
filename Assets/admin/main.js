@@ -19,5 +19,5 @@ ReactDOM.render(
     document.getElementById('zix-admin')
 );
 
-// store.dispatch({type: "LOGIN_USER", payload: {name: 'badi ifaoui'}})
+store.dispatch({type: "AUTH_SET_TOKEN", payload: {name: 'badi ifaoui'}})
 
