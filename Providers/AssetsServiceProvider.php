@@ -29,7 +29,7 @@ class AssetsServiceProvider extends ServiceProvider
     {
         $viewPath = base_path('views/modules/core');
 
-        $sourcePath = __DIR__ . '/../Assets/views';
+        $sourcePath = __DIR__ . '/../Assets';
 
         $this->publishes([
             $sourcePath => $viewPath
