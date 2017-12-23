@@ -19,7 +19,8 @@
 <script type="text/babel">
     import Vue from 'vue';
     import Component from 'vue-class-component';
-    import {AppHeader, AppFooter, AppSideBar, AppSnackBar} from './components';
+    import AppHeader from '@zix-core/admin/components/header'
+    import {AppFooter, AppSideBar, AppSnackBar} from "@zix-core/admin/components";
 
     @Component({
         components: {
