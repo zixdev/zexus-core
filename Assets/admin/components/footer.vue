@@ -19,8 +19,8 @@
     export default class Footer extends Vue {
 
         get rights() {
-            let d = new Date()
-            return ` &copy; ${d.getFullYear()} ${this.$store.state.app_name}, All right reserved`
+            let d = new Date();
+            return ` &copy; 2016-${d.getFullYear()} ${this.$store.state.app_name}, All right reserved`
         }
 
     }
