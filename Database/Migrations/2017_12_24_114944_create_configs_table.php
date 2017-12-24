@@ -30,7 +30,9 @@ class CreateConfigsTable extends Migration
             $table->uuid('config_id')->index();
             $table->foreign('config_id')->references('id')->on('configs')->onDelete('cascade');
 
-            $table->morphs('configable');
+            $table->uuid('configable_id')->nullable();
+            $table->string('configable_type')->nullable();
+            $table->index(['configable_id', 'configable_type']);
         });
     }
 

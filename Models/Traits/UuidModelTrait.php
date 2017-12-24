@@ -32,7 +32,9 @@ trait UuidModelTrait
                 // This is necessary because on \Illuminate\Database\Eloquent\Model::performInsert
                 // will not check for $this->getIncrementing() but directly for $this->incrementing
                 $model->incrementing = false;
-                $model->attributes[$model->getKeyName()] = Uuid::uuid4();
+                $model->keyType = 'string';
+                $model->primaryKey = 'id';
+                $model->attributes[$model->getKeyName()] = (string) Uuid::uuid4();
             }
         }, 0);
     }

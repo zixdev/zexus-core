@@ -2,16 +2,14 @@
 
 namespace Zix\Core\Models;
 
-use Illuminate\Database\Eloquent\Model;
-
 /**
  * Class Config
  * @package Zix\Core\Models
  */
-class Config extends Model
+class Config extends BaseModel
 {
     /**
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['key', 'value', 'status'];
 }

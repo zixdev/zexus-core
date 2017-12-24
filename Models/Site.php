@@ -1,6 +1,7 @@
 <?php
 
 namespace Zix\Core\Models;
+use Zix\Core\Models\Traits\ConfigableTrait;
 
 
 /**
@@ -9,6 +10,7 @@ namespace Zix\Core\Models;
  */
 class Site extends BaseModel
 {
+    use ConfigableTrait;
     /**
      * @var array
      */

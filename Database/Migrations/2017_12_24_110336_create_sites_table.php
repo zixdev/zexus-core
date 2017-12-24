@@ -34,7 +34,9 @@ class CreateSitesTable extends Migration
             $table->uuid('site_id')->index();
             $table->foreign('site_id')->references('id')->on('sites')->onDelete('cascade');
 
-            $table->morphs('siteable');
+            $table->uuid('siteable_id')->nullable();
+            $table->string('siteable_type')->nullable();
+            $table->index(['siteable_id', 'siteable_type']);
         });
     }
 
