@@ -1,12 +1,10 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import Vue from 'vue';
+import Router from 'vue-router';
 //import beforeEach from './beforeEach'
-// import  app  from '../core'
+import  '../views';
 
-Vue.use(Router)
-
+Vue.use(Router);
 // https://developer.mozilla.org/pt-BR/docs/Web/JavaScript/Reference/Operators/Spread_operator
-const routes = [...Zexus.routes];
 
 function createRoutesFromMenu(routes) {
     let newRoutes = [];
@@ -28,12 +26,13 @@ function createRoutesFromMenu(routes) {
 
     return newRoutes;
 }
-console.log('=======+>', routes);
+
 const router = new Router({
-    routes: [...createRoutesFromMenu(routes)],
+    routes: [...createRoutesFromMenu(Zexus.routes)],
     linkActiveClass: 'active',
     //mode: 'history' // do not use /#/.
-})
+});
+console.log('App Routes =======+>', router);
 
 /**
  * Before a route is resolved we check for

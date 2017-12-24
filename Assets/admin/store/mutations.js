@@ -1,6 +1,5 @@
 // https://vuex.vuejs.org/en/mutations.html
-
-import * as TYPES from './types'
+import * as TYPES from './types';
 
 /* eslint-disable no-param-reassign */
 export default {
@@ -11,7 +10,6 @@ export default {
         state.messages[obj.type] = obj.message;
     },
     [TYPES.TOGGLE_SIDEBAR](state) {
-        console.log('Mutitation been called')
         state.sidebar = !state.sidebar;
     }
 }

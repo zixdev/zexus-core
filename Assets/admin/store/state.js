@@ -9,6 +9,6 @@ export default {
         validation: {}
     },
     fetching: false,
-    sidebar: false,
+    sidebar: true,
     app_name: 'ZIX DEV'
-}
+};

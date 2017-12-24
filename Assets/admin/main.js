@@ -22,7 +22,7 @@ import httpPlugin from './plugins/http'
  * Make $http avaible to all components
  * Send store and router to httpPlugin (injection)
  */
-Vue.use(httpPlugin, { store, router })
+Vue.use(httpPlugin, { store, router });
 
 /**
  * Dynamic lang loader
@@ -42,4 +42,4 @@ new Vue({
     i18n,
     template: '<MainApp/>',
     components: { MainApp }
-})
+});

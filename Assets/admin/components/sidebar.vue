@@ -1,6 +1,6 @@
 <template>
     <v-navigation-drawer class="l-sidebar "
-                         persistent
+                         fixed
                          clipped
                          app
                          v-model="_sidebar">
@@ -25,14 +25,14 @@
                         </v-list-tile-content>
                     </v-list-tile>
                 </v-list-group>
-                <v-subheader v-else-if="item.header" v-text="item.header"/>
+                <v-subheader v-else-if="item.header" v-text="item.header"></v-subheader>
                 <v-divider v-else-if="item.divider" light/>
                 <v-list-tile v-else ripple router :to="{name: item.name}">
                     <v-list-tile-avatar>
                         <v-icon>{{ item.meta.icon }}</v-icon>
                     </v-list-tile-avatar>
                     <v-list-tile-content>
-                        <v-list-tile-title v-text="$t(item.name)"/>
+                        <v-list-tile-title v-text="$t(item.name)"></v-list-tile-title>
                     </v-list-tile-content>
                 </v-list-tile>
 
@@ -60,6 +60,7 @@
         set _sidebar(val) {}
 
         valid(routes) {
+            console.warn(routes)
             return routes.filter(route => route.meta.menu);
         }
 

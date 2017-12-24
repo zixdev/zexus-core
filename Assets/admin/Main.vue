@@ -2,15 +2,15 @@
     <v-app>
         <app-side-bar></app-side-bar>
         <app-header></app-header>
-        <main>
-            <v-content>
-                <v-container fluid  class="l-main">
-                    <transition name="fade" mode="out-in">
-                        <router-view></router-view>
-                    </transition>
-                </v-container>
-            </v-content>
-        </main>
+
+        <v-content>
+            <v-container fluid class="l-main">
+                <transition name="fade" mode="out-in">
+                    <router-view></router-view>
+                </transition>
+            </v-container>
+        </v-content>
+
         <app-snack-bar></app-snack-bar>
         <app-footer></app-footer>
     </v-app>
@@ -19,8 +19,7 @@
 <script type="text/babel">
     import Vue from 'vue';
     import Component from 'vue-class-component';
-    import AppHeader from '@zix-core/admin/components/header'
-    import {AppFooter, AppSideBar, AppSnackBar} from "@zix-core/admin/components";
+    import {AppFooter, AppSideBar, AppSnackBar, AppHeader} from "@zix-core/admin/components";
 
     @Component({
         components: {
@@ -31,7 +30,6 @@
         mounted() {
 
         }
-
 
 
     }
