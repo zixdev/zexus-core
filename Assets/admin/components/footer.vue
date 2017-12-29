@@ -4,7 +4,7 @@
             <v-layout class="l-footer__copy_write">
                 <v-flex md6 v-html="rights"></v-flex>
                 <v-flex md6 class="text-sm-right">
-                    Powered By: <a href="https://zixdev.com/" class="text--white" target="_blank">zixdev.com</a>
+                    Powered By: <a href="https://zixdev.com/" target="_blank">zixdev.com</a>
                 </v-flex>
             </v-layout>
         </v-container>
@@ -29,7 +29,6 @@
     .footer {
         height: 50px;
         a {
-            color: #FFF;
             text-decoration: none;
             font-weight: bold;
             font-size: 16px;

@@ -4,15 +4,13 @@
             <v-icon dark>settings</v-icon>
         </v-btn>
         <v-card>
-            <v-card-row>
-                <v-toolbar>
-                    <v-btn icon="icon" block @click.native="dialog = false" light>
-                        <v-icon>close</v-icon>
-                    </v-btn>
-                    <v-toolbar-title><span class="capitalize-text">{{ name }}</span> Table Settings</v-toolbar-title>
-                    <v-btn light flat @click.native="save()">Save</v-btn>
-                </v-toolbar>
-            </v-card-row>
+            <v-toolbar>
+                <v-btn icon="icon" block @click.native="dialog = false" light>
+                    <v-icon>close</v-icon>
+                </v-btn>
+                <v-toolbar-title><span class="capitalize-text">{{ name }}</span> Table Settings</v-toolbar-title>
+                <v-btn light flat @click.native="save()">Save</v-btn>
+            </v-toolbar>
 
             <v-card-text>
                 <v-list three-line subheader>
@@ -69,18 +67,18 @@
         dialog = false;
 
         mounted() {
-            $('.dd').nestable();
+            // $('.dd').nestable();
         }
 
         save() {
-            this.dialog = false;
-            let columns = $('.dd').nestable('serialize');
-            this.$events.$emit('update-table-headers', columns);
-            columns = JSON.stringify(columns);
-            this.$http.put(`user/config`, {
-                key: 'tables.' + this.name,
-                data: columns
-            });
+            // this.dialog = false;
+            // let columns = $('.dd').nestable('serialize');
+            // this.$events.$emit('update-table-headers', columns);
+            // columns = JSON.stringify(columns);
+            // this.$http.put(`user/config`, {
+            //     key: 'tables.' + this.name,
+            //     data: columns
+            // });
         }
 
     }

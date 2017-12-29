@@ -9,9 +9,9 @@ import  appearance  from './+appearance';
 // ...dashboard must be the last one because of the catchall instruction
 const Routes = [
     ...home,
-    ...pages,
-    ...accounts,
-    ...appearance,
+    // ...pages,
+    // ...accounts,
+    // ...appearance,
     ...advanced
 ];
 

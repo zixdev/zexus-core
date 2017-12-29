@@ -1,9 +1,5 @@
 import Vue from 'vue';
 import queryString from 'qs';
-import TableSettings from './table-settings.vue';
-
-Vue.component('data-table-settings', TableSettings);
-
 
 export default class DataTables extends Vue {
     api_url = '';
@@ -11,7 +7,8 @@ export default class DataTables extends Vue {
     totalItems = 0;
     items = [];
     loading = true;
-    headers = [];
+    selected = [];
+    actions = [];
     pagination = {rowsPerPage: 10};
     eloquent = ['active', 'trashed'];
     //eloquent = [
@@ -22,8 +19,9 @@ export default class DataTables extends Vue {
 
     initTablage(name) {
         this.api_url = name;
-        this.getUserTableConfig(name);
+        // this.getUserTableConfig(name); // @TODO: get dynamic table config
         this.setWatchers();
+        this.buildActions();
 
         this.getDataFromApi();
     }
@@ -66,7 +64,7 @@ export default class DataTables extends Vue {
     setWatchers() {
         this.$watch('pagination', () => {
             this.getDataFromApi();
-        }, {deep: true})
+        }, {deep: true});
 
         this.$watch('search', () => this.getDataFromApi());
         this.$watch('eloquent_status', () => this.getDataFromApi(), {deep: true});
@@ -83,8 +81,9 @@ export default class DataTables extends Vue {
         this.loading = true
         this.$http.get(this.api_url + this.serialize(this.query))
             .then(res => {
-                this.items = res.data.data
-                this.totalItems = res.data.recordsTotal;
+                console.warn('data ==>', res.data.original);
+                this.items = res.data.original.data;
+                this.totalItems = res.data.original.recordsTotal;
                 this.loading = false
             })
 
@@ -116,11 +115,11 @@ export default class DataTables extends Vue {
         this.$http.get(`user/config/tables.${key}`)
             .then(res => {
                 let data = res.data;
-                if(!this.isObject(data)) data = JSON.parse(data);
+                if (!this.isObject(data)) data = JSON.parse(data);
                 this.headers = data.map(column => {
                     return {
-                        text: this.$t('table.'+column.value),
-                        left: column.left,
+                        text: this.$t('table.' + column.value),
+                        // left: (column.align !== 'left'),
                         value: column.value,
                         sortable: column.sortable,
                         searchable: column.searchable
@@ -130,7 +129,15 @@ export default class DataTables extends Vue {
 
     }
 
+
+
     isObject(val) {
         return val instanceof Object;
+    }
+
+    buildActions() {
+        this.$events.$on('deleteData', id => this.deleteData(id));
+        this.$events.$on('forceDeleteData', id => this.forceDeleteData(id));
+        this.$events.$on('restoreData', id => this.restoreData(id));
     }
 }

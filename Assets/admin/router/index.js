@@ -32,7 +32,6 @@ const router = new Router({
     linkActiveClass: 'active',
     //mode: 'history' // do not use /#/.
 });
-console.log('App Routes =======+>', router);
 
 /**
  * Before a route is resolved we check for

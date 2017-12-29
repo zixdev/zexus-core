@@ -1,10 +1,14 @@
-import { isArray } from 'lodash'
+import {isArray} from "lodash";
 
 export default (http, store, router) => {
     // https://github.com/mzabriskie/axios#interceptors
     http.interceptors.response.use(
         response => {
-            store.dispatch('setFetching', { fetching: false })
+            store.dispatch('setFetching', {fetching: false});
+            // if res msg
+            if (response.data.message) {
+                store.dispatch('setMessage', {type: 'success', message: response.data.message})
+            }
             return response;
         },
         /**
@@ -13,29 +17,31 @@ export default (http, store, router) => {
          * requests
          */
         (error) => {
-            const { response } = error
-            /**
-             * If token is either expired, not provided or invalid
-             * then redirect to login. On server side the error
-             * messages can be changed on app/Providers/EventServiceProvider.php
-             */
-            if ([401, 400].indexOf(response.status) > -1) {
-                router.push({ name: 'auth.login' })
-            }
+            const {response} = error;
+
             /**
              * Error messages are sent in arrays
              */
-            if (isArray(response.data)) {
-                store.dispatch('setMessage', { type: 'error', message: response.data.messages })
+            if (isArray(response.data) && response.data.messages) {
+                store.dispatch('setMessage', {type: 'error', message: response.data.messages});
                 /**
-                 * Laravel generated validation errors are
-                 * sent in an object
+                 * Laravel generated validation errors are sent in an object
                  */
+            } else if (response.data.errors) {
+                store.dispatch('setMessage', {type: 'validation', message: response.data.errors})
             } else {
-                store.dispatch('setMessage', { type: 'validation', message: response.data })
+                store.dispatch('setMessage', {type: 'error', message: 'Internal Server Error'});
             }
 
-            store.dispatch('setFetching', { fetching: false })
+            if ([403].indexOf(response.status) > -1) {
+                store.dispatch('setMessage', {type: 'error', message: "You're not allowed to do this action"});
+            }
+
+            if ([404].indexOf(response.status) > -1) {
+                store.dispatch('setMessage', {type: 'error', message: 'Please Check your connection'});
+            }
+
+            store.dispatch('setFetching', {fetching: false});
 
             return Promise.reject(error)
         }

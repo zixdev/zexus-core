@@ -60,7 +60,6 @@
         set _sidebar(val) {}
 
         valid(routes) {
-            console.warn(routes)
             return routes.filter(route => route.meta.menu);
         }
 

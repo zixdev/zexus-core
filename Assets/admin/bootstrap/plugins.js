@@ -8,6 +8,11 @@ import VueFroala from 'vue-froala-wysiwyg';
 /**
  * Vuetify UI
  */
-Vue.use(Vuetify);
+// TODO:: add dynamic themes
+Vue.use(Vuetify, {
+    theme: {
+        // primary: '#E91E63'
+    }
+});
 Vue.use(VueEvents);
 Vue.use(VueFroala);
