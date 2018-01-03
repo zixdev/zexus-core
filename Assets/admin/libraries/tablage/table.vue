@@ -24,11 +24,14 @@
                     class="elevation-1"
             >
                 <template slot="items" slot-scope="props">
-                    <!--<table-items :props="props" :headers="_headers"></table-items>-->
+                    <table-items :props="props" :headers="headers"></table-items>
                 </template>
             </v-data-table>
         </v-card>
+
         <v-btn
+                class="tablage--btn"
+                v-if="!selected.length"
                 absolute
                 dark
                 fab
@@ -39,7 +42,42 @@
         >
             <v-icon>add</v-icon>
         </v-btn>
+        <v-speed-dial
+                class="tablage--speed-dial"
+                v-if="selected.length"
+                v-model="fab"
+                absolute
+                dark
+                fab
+                bottom
+                right
+                color="primary"
+        >
+            <v-btn
+                    slot="activator"
+                    color="blue darken-2"
+                    dark
+                    fab
+                    hover
+                    v-model="fab"
+            >
+                <v-icon>settings</v-icon>
+                <v-icon>close</v-icon>
+            </v-btn>
+
+            <v-btn
+                    fab
+                    dark
+                    small
+                    color="red"
+                    @click="pluckDelete()"
+            >
+                <v-icon>delete</v-icon>
+            </v-btn>
+        </v-speed-dial>
     </div>
+
+
 </template>
 
 <script>
@@ -55,8 +93,16 @@
         }
     })
     export default class Table extends DataTable {
+        fab = false;
+
         mounted() {
-            // this.initTablage(this.route)
+            this.initTablage(this.route)
+        }
+        /*
+         * Pluck Delete Selected Row.
+         */
+        pluckDelete() {
+            this.selected.map(item => this.deleteData(item.id));
         }
 
     }

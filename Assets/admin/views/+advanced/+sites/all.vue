@@ -1,9 +1,10 @@
 <template>
     <div>
         <data-table
-            :headers="headers"
-            route="sites"
+                :headers="headers"
+                route="sites"
         ></data-table>
+
     </div>
 </template>
 
