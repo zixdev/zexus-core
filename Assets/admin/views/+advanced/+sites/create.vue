@@ -27,11 +27,11 @@
                         :rules="messages.validation.ui"
                         required
                 ></v-text-field>
-                <v-btn light primary :loading="$store.state.fetching" type="submit">
+                <v-btn color="primary" :loading="$store.state.fetching" type="submit">
                     <i v-if="$store.state.fetching" class="fa fa-spinner fa-pulse"></i>
                     {{ edit ? $t('form.edit') : $t('form.create') }}
                 </v-btn>
-                <v-btn default type="reset" router :to="{name: 'system.sites.index'}">
+                <v-btn type="reset" router :to="{name: 'system.sites.index'}">
                     {{ $t('form.cancel') }}
                 </v-btn>
             </form>
@@ -57,7 +57,7 @@
 
         mounted() {
             if (this.edit) {
-                this.$http.get('sites/' + this.$route.params.id).then(response => this.site = response.data);
+                this.$http.get('sites/' + this.$route.params.id).then(response => this.site = response.data.data);
             }
         }
 

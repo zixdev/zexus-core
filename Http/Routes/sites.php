@@ -6,7 +6,7 @@ Route::group(['middleware' => ['api']], function ($router) {
         'before' => 'can:view_sites'
     ]);
 
-    $router->get('sites/{id}', [
+    $router->get('sites/{site}', [
         'uses' => 'SiteController@show',
         'before' => 'can:view_sites'
     ]);
@@ -16,32 +16,32 @@ Route::group(['middleware' => ['api']], function ($router) {
         'before' => 'can:create_sites'
     ]);
 
-    $router->put('sites/{id}', [
+    $router->put('sites/{site}', [
         'uses' => 'SiteController@update',
         'before' => 'can:update_sites'
     ]);
 
-    $router->delete('sites/{id}', [
+    $router->delete('sites/{site}', [
         'uses' => 'SiteController@destroy',
         'before' => 'can:delete_sites'
     ]);
 
-    $router->get('sites/{id}/themes', [
+    $router->get('sites/{site}/themes', [
         'uses' => 'SiteUiController@index',
         'before' => 'can:view_site_themes'
     ]);
 
-    $router->post('sites/{id}/themes', [
+    $router->post('sites/{site}/themes', [
         'uses' => 'SiteUiController@store',
         'before' => 'can:create_site_themes'
     ]);
 
-    $router->get('sites/{id}/config', [
+    $router->get('sites/{site}/config', [
         'uses' => 'SiteConfigController@index',
         'before' => 'can:view_site_configs'
     ]);
 
-    $router->post('sites/{id}/config', [
+    $router->post('sites/{site}/config', [
         'uses' => 'SiteConfigController@store',
         'before' => 'can:create_site_configs'
     ]);

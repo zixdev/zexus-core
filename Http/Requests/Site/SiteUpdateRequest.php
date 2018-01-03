@@ -3,6 +3,7 @@
 namespace Zix\Core\Http\Requests\Site;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class SiteUpdateRequest extends FormRequest
 {
@@ -13,7 +14,7 @@ class SiteUpdateRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +25,10 @@ class SiteUpdateRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'min:3', 'max:255', Rule::unique('sites')->ignore($this->id)],
+            'ui' => ['required', 'min:3', 'max:255', Rule::unique('sites')->ignore($this->id)],
+            'url' => ['required', 'min:3', 'max:255', Rule::unique('sites')->ignore($this->id)],
+
         ];
     }
 }

@@ -103,6 +103,7 @@
          */
         pluckDelete() {
             this.selected.map(item => this.deleteData(item.id));
+            this.selected = [];
         }
 
     }

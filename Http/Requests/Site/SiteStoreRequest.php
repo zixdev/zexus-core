@@ -13,7 +13,7 @@ class SiteStoreRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class SiteStoreRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'name' => ['required', 'min:3', 'max:255', 'unique:sites,name'],
+            'ui' => ['required', 'min:3', 'max:255', 'unique:sites,ui'],
+            'url' => ['required', 'min:3', 'max:255', 'unique:sites,url'],
         ];
     }
 }
