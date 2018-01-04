@@ -1,6 +1,7 @@
 import {AllSites, CreateSites, ConfigSites} from './+sites';
 import {FileManager} from './+storage';
 import {SystemLogs} from './+logs';
+import {LanguageLines} from './+language-lines';
 
 export default [
     {
@@ -44,7 +45,16 @@ export default [
                 path: '/advanced/logs',
                 component: SystemLogs,
                 meta: {requiresAuth: true, permission: 'view_sites', menu: true},
-            }
+            },
+
+
+
+            {
+                name: 'system.language_lines.index',
+                path: '/advanced/language-lines',
+                component: LanguageLines,
+                meta: {requiresAuth: true, permission: 'view_language_lines', menu: true},
+            },
         ]
     }
 ];
