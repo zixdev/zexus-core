@@ -4,5 +4,8 @@ import './bootstrap/plugins';
 
 
 window.Zexus = {
-    routes: []
+    routes: [],
+    lang: {
+        groups: ['system', 'table']
+    }
 };

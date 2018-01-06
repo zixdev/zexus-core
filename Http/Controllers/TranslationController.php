@@ -10,6 +10,7 @@ use Zix\Core\Models;
  * Class TranslationController
  * @property Models\Translation model
  * @package Zix\Core\Http\Controllers
+ * @resource Translation
  */
 class TranslationController
 {
