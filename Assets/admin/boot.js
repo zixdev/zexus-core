@@ -6,6 +6,6 @@ import './bootstrap/plugins';
 window.Zexus = {
     routes: [],
     lang: {
-        groups: ['system', 'table']
+        groups: ['dashboard', 'system', 'table']
     }
 };

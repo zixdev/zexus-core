@@ -3,15 +3,15 @@ import * as TYPES from './types';
 
 export default {
 
-    setFetching({ commit }, obj = {fetching: true}) {
+    setFetching({commit}, obj = {fetching: true}) {
         commit(TYPES.MAIN_SET_FETCHING, obj);
     },
 
-    setMessage({ commit }, obj) {
+    setMessage({commit}, obj) {
         commit(TYPES.MAIN_SET_MESSAGE, obj);
     },
 
-    resetMessages({ commit }) {
+    resetMessages({commit}) {
         commit(TYPES.MAIN_SET_MESSAGE, {type: 'success', message: ''});
         commit(TYPES.MAIN_SET_MESSAGE, {type: 'error', message: []});
         commit(TYPES.MAIN_SET_MESSAGE, {type: 'warning', message: ''});
@@ -20,5 +20,19 @@ export default {
 
     toggleSidebar({commit}) {
         commit(TYPES.TOGGLE_SIDEBAR);
+    },
+
+
+    setBreadCrumbs({commit}, items) {
+        let routes = ['dashboard.index'];
+        items.map(item => routes.push(item));
+        // TODO:: add logic here
+        // each item in items must be object
+        // item = {
+        //     display_text: '',
+        //     route_name: '',
+        //     route_path: '',
+        // };
+        commit(TYPES.SET_BREADCRUMBS, routes);
     }
 }

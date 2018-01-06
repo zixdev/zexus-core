@@ -1,48 +1,48 @@
-import {AllSites, CreateSites, ConfigSites} from './+sites';
+import {Sites, SiteManager, SiteConfig} from './+sites';
 import {FileManager} from './+storage';
 import {SystemLogs} from './+logs';
-import {Translations, ManageTranslation} from './+translations';
+import {Translations, TranslationManager} from './+translations';
 
 export default [
     {
         name: 'system.index',
-        path: '/advanced',
-        component: AllSites,
+        path: '/system',
+        component: Sites,
         meta: {requiresAuth: true, permission: 'view_admin', icon: 'settings', menu: true},
         children: [
             {
                 name: 'system.sites.index',
-                path: '/advanced/sites',
-                component: AllSites,
+                path: '/system/sites',
+                component: Sites,
                 meta: {requiresAuth: true, permission: 'view_sites', menu: true},
             },
             {
                 name: 'system.sites.create',
-                path: '/advanced/sites/create',
-                component: CreateSites,
+                path: '/system/sites/create',
+                component: SiteManager,
                 meta: {requiresAuth: true, permission: 'create_sites'},
             },
             {
                 name: 'system.sites.edit',
-                path: '/advanced/sites/:id/edit',
-                component: CreateSites,
+                path: '/system/sites/:id/edit',
+                component: SiteManager,
                 meta: {requiresAuth: true, permission: 'update_sites'},
             },
             {
                 name: 'system.sites.config.index',
-                path: '/advanced/sites/:id/config',
-                component: ConfigSites,
+                path: '/system/sites/:id/config',
+                component: SiteConfig,
                 meta: {requiresAuth: true, permission: 'view_site_configs'},
             },
             {
                 name: 'system.file_manager.index',
-                path: '/advanced/file-manager',
+                path: '/system/file-manager',
                 component: FileManager,
                 meta: {requiresAuth: true, permission: 'view_sites', menu: true},
             },
             {
                 name: 'system.logs.index',
-                path: '/advanced/logs',
+                path: '/system/logs',
                 component: SystemLogs,
                 meta: {requiresAuth: true, permission: 'view_sites', menu: true},
             },
@@ -50,20 +50,20 @@ export default [
 
             {
                 name: 'system.translations.index',
-                path: '/advanced/translations',
+                path: '/system/translations',
                 component: Translations,
                 meta: {requiresAuth: true, permission: 'view_translations', menu: true},
             },
             {
                 name: 'system.translations.create',
-                path: '/advanced/translations/create',
-                component: ManageTranslation,
+                path: '/system/translations/create',
+                component: TranslationManager,
                 meta: {requiresAuth: true, permission: 'create_translations'},
             },
             {
                 name: 'system.translations.edit',
-                path: '/advanced/translations/:id/edit',
-                component: ManageTranslation,
+                path: '/system/translations/:id/edit',
+                component: TranslationManager,
                 meta: {requiresAuth: true, permission: 'update_translations'},
             },
         ]

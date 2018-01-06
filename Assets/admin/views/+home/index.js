@@ -1,8 +1,8 @@
-import {Home} from './components'
+const Dashboard = r => require.ensure([], () => r(require('./Dashboard')), 'base-bundle');
 export default [{
-    name: 'dashboard',
+    name: 'dashboard.index',
     path: '/',
-    component: Home,
+    component: Dashboard,
     meta: {
         requiresAuth: true,
         icon:  'dashboard',

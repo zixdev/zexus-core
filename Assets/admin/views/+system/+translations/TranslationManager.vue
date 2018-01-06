@@ -1,10 +1,6 @@
 <template>
     <form @submit.prevent="save()">
-        <v-card class="mb-3">
-            <v-card-title>
-                {{ edit ? $t('system.translations.edit') : $t('system.translations.add')}}
-            </v-card-title>
-        </v-card>
+
         <v-card class="mb-3">
             <v-card-text>
                 <v-text-field
@@ -41,8 +37,7 @@
 
             </v-card-text>
         </v-card>
-        <v-card>
-            <v-card-text>
+        <div>
                 <v-btn color="primary" :loading="$store.state.fetching" type="submit">
                     <i v-if="$store.state.fetching" class="fa fa-spinner fa-pulse"></i>
                     {{ edit ? $t('form.edit') : $t('form.create') }}
@@ -50,8 +45,7 @@
                 <v-btn type="reset" router :to="{name: 'system.translations.index'}">
                     {{ $t('form.cancel') }}
                 </v-btn>
-            </v-card-text>
-        </v-card>
+        </div>
     </form>
 </template>
 
@@ -68,10 +62,15 @@
             ...mapActions(['resetMessages', 'setMessage'])
         }
     })
-    export default class ManageTranslation extends Vue {
+    export default class TranslationManager extends Vue {
         translation = {text: {}};
 
         mounted() {
+
+            this.$store.dispatch('setBreadCrumbs', [
+                'system.translations.index',
+                'system.translations.'+ (this.edit ? 'edit': 'add')
+            ]);
             if (this.edit) {
                 this.$http.get('translations/' + this.$route.params.id).then(response => this.translation = response.data.data);
             }

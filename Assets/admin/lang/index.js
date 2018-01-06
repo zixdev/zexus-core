@@ -19,8 +19,6 @@ const i18n = new VueI18n({
 });
 
 axios.get('/api/translations/groups/' + Zexus.lang.groups.join(','))
-    .then(response => {
-        console.info('Lang :: ', response.data);
-        i18n.setLocaleMessage(LOCAL_LANG, response.data)
-    });
+    .then(response => i18n.setLocaleMessage(LOCAL_LANG, response.data));
+
 export default i18n;

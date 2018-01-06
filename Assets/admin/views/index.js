@@ -1,6 +1,6 @@
 import  pages  from './+pages';
 import  home  from './+home';
-import  advanced  from './+advanced';
+import  system  from './+system';
 import  accounts  from './+accounts';
 import  appearance  from './+appearance';
 
@@ -12,7 +12,7 @@ const Routes = [
     // ...pages,
     // ...accounts,
     // ...appearance,
-    ...advanced
+    ...system
 ];
 
 Routes.map(route => {

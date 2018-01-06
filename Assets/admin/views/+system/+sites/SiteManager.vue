@@ -52,7 +52,7 @@
             ...mapActions(['resetMessages', 'setMessage'])
         }
     })
-    export default class CreateEditSite extends Vue {
+    export default class SiteManager extends Vue {
         site = {};
 
         mounted() {

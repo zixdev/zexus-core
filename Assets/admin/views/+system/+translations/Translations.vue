@@ -64,5 +64,11 @@
             }
         ];
 
+        mounted() {
+            this.$store.dispatch('setBreadCrumbs', [
+                'system.translations.index'
+            ]);
+        }
+
     }
 </script>

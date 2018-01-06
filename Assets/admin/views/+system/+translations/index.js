@@ -4,4 +4,4 @@
  */
 /* eslint-disable global-require */
 export const Translations = r => require.ensure([], () => r(require('./Translations')), 'advanced-bundle');
-export const ManageTranslation = r => require.ensure([], () => r(require('./ManageTranslation')), 'advanced-bundle');
+export const TranslationManager = r => require.ensure([], () => r(require('./TranslationManager')), 'advanced-bundle');

@@ -5,6 +5,9 @@
 
         <v-content>
             <v-container fluid class="l-main">
+
+                <app-breadcrumbs></app-breadcrumbs>
+
                 <transition name="fade" mode="out-in">
                     <router-view></router-view>
                 </transition>
@@ -19,14 +22,16 @@
 <script type="text/babel">
     import Vue from 'vue';
     import Component from 'vue-class-component';
-    import {AppFooter, AppSideBar, AppSnackBar, AppHeader} from "@zix-core/admin/components";
+    import {AppFooter, AppSideBar, AppSnackBar, AppHeader, AppBreadcrumbs} from "@zix-core/admin/components";
 
     @Component({
         components: {
-            AppHeader, AppFooter, AppSideBar, AppSnackBar
+            AppHeader, AppFooter, AppSideBar, AppSnackBar, AppBreadcrumbs
         }
     })
     export default class ZixAdmin extends Vue {
+        items = [];
+
         mounted() {
 
         }

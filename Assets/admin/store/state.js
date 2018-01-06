@@ -16,5 +16,7 @@ export default {
         supported_languages: ['en', 'fr', 'ar'],
         default_lang: 'en',
         fallback_lang: 'en'
-    }
+    },
+
+    breadcrumbs: ['dashboard.index']
 };

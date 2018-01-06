@@ -11,5 +11,8 @@ export default {
     },
     [TYPES.TOGGLE_SIDEBAR](state) {
         state.sidebar = !state.sidebar;
+    },
+    [TYPES.SET_BREADCRUMBS](state, items) {
+        state.breadcrumbs = items;
     }
 }

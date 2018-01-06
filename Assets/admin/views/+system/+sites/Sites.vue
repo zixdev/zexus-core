@@ -2,7 +2,8 @@
     <div>
         <data-table
                 :headers="headers"
-                route="sites"
+                api-route="sites"
+                route="system.sites"
         ></data-table>
 
     </div>
@@ -18,7 +19,7 @@
             DataTable
         }
     })
-    export default class AllSites extends Vue {
+    export default class Sites extends Vue {
         headers = [
             {
                 text: 'name',
@@ -52,5 +53,10 @@
             }
         ];
 
+        mounted() {
+            this.$store.dispatch('setBreadCrumbs', [
+                'system.sites.index'
+            ]);
+        }
     }
 </script>
