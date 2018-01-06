@@ -32,12 +32,12 @@ export default class DataTables extends Vue {
         let i = 0;
         this.headers.map(header => {
             columns.push({
-                searchable: header.searchable,
-                orderable: header.sortable,
+                searchable: !!header.searchable,
+                orderable: !!header.sortable,
                 data: header.value,
                 name: header.text
             });
-            if (header.value == this.pagination.sortBy) index_sort = i;
+            if (header.value === this.pagination.sortBy) index_sort = i;
             i++;
         });
 

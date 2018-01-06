@@ -1,10 +1,10 @@
 <?php
 
-namespace Zix\Core\Http\Requests\LanguageLine;
+namespace Zix\Core\Http\Requests\Translation;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class LanguageLineDestroyRequest extends FormRequest
+class TranslationUpdateRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.

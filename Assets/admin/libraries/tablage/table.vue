@@ -24,60 +24,12 @@
                     class="elevation-1"
             >
                 <template slot="items" slot-scope="props">
-                    <table-items :props="props" :headers="headers"></table-items>
+                    <table-items :route="route" :props="props" :headers="headers"></table-items>
                 </template>
             </v-data-table>
         </v-card>
-
-        <v-btn
-                class="tablage--btn"
-                v-if="!selected.length"
-                absolute
-                dark
-                fab
-                bottom
-                right
-                color="primary"
-                :to="{name: 'system.sites.create'}" :title="{html: $t('system.sites.create')}"
-        >
-            <v-icon>add</v-icon>
-        </v-btn>
-        <v-speed-dial
-                class="tablage--speed-dial"
-                v-if="selected.length"
-                v-model="fab"
-                absolute
-                dark
-                fab
-                bottom
-                right
-                color="primary"
-        >
-            <v-btn
-                    slot="activator"
-                    color="blue darken-2"
-                    dark
-                    fab
-                    hover
-                    v-model="fab"
-            >
-                <v-icon>settings</v-icon>
-                <v-icon>close</v-icon>
-            </v-btn>
-
-            <v-btn
-                    fab
-                    dark
-                    small
-                    color="red"
-                    @click="pluckDelete()"
-            >
-                <v-icon>delete</v-icon>
-            </v-btn>
-        </v-speed-dial>
+        <table-actions></table-actions>
     </div>
-
-
 </template>
 
 <script>
@@ -85,19 +37,36 @@
     import Component from "vue-class-component";
     import DataTable from './index'
     import TableItems from './table-items';
+    import TableActions from './table-actions';
 
     @Component({
-        props: ['headers', 'route'],
+        // props: ['headers', 'route'],
+        props: {
+            headers: {
+                type: Array,
+                required: true,
+                default: []
+            },
+            apiRoute: {
+                type: String,
+                required: true
+            },
+            route: {
+                type: String,
+                required: true
+            },
+        },
         components: {
-            TableItems
+            TableItems,
+            TableActions
         }
     })
     export default class Table extends DataTable {
-        fab = false;
 
         mounted() {
-            this.initTablage(this.route)
+            this.initTablage(this.apiRoute)
         }
+
         /*
          * Pluck Delete Selected Row.
          */

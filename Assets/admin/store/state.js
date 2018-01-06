@@ -10,5 +10,11 @@ export default {
     },
     fetching: false,
     sidebar: true,
-    app_name: 'ZIX DEV'
+    app_name: 'ZIX DEV',
+
+    lang: {
+        supported_languages: ['en', 'fr', 'ar'],
+        default_lang: 'en',
+        fallback_lang: 'en'
+    }
 };

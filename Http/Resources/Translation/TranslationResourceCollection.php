@@ -1,10 +1,10 @@
 <?php
 
-namespace Zix\Core\Http\Resources\LanguageLine;
+namespace Zix\Core\Http\Resources\Translation;
 
 use Illuminate\Http\Resources\Json\ResourceCollection;
 
-class LanguageLineResourceCollection extends ResourceCollection
+class TranslationResourceCollection extends ResourceCollection
 {
     /**
      * Transform the resource collection into an array.

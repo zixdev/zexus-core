@@ -2,9 +2,9 @@
     <div>
         <data-table
                 :headers="headers"
-                route="language-lines"
+                api-route="translations"
+                route="system.translations"
         ></data-table>
-
     </div>
 </template>
 
@@ -18,7 +18,7 @@
             DataTable
         }
     })
-    export default class LanguageLines extends Vue {
+    export default class Translations extends Vue {
         headers = [
             {
                 text: 'group',
@@ -37,14 +37,30 @@
             {
                 text: 'text',
                 value: 'text',
-                searchable: true,
-                sortable: true,
+                callback: (data) => {
+                    let {default_lang, fallback_lang} = this.$store.state.lang;
+                    return (data.text && data.text[default_lang]) ? data.text[default_lang] : data.text[fallback_lang];
+                },
+                searchable: false,
+                sortable: false,
+            },
+            {
+                text: 'supported_languages',
+                callback: (data) => {
+                    return Object.keys(data.text).map(lang => {
+                        return lang.toUpperCase();
+                    }).join(', ');
+                },
+                searchable: false,
+                sortable: false,
             },
 
             {
                 text: 'Actions',
                 value: 'actions',
                 align: 'right',
+                searchable: false,
+                sortable: false,
             }
         ];
 

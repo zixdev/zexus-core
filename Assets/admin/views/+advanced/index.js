@@ -1,7 +1,7 @@
 import {AllSites, CreateSites, ConfigSites} from './+sites';
 import {FileManager} from './+storage';
 import {SystemLogs} from './+logs';
-import {LanguageLines} from './+language-lines';
+import {Translations, ManageTranslation} from './+translations';
 
 export default [
     {
@@ -48,12 +48,23 @@ export default [
             },
 
 
-
             {
-                name: 'system.language_lines.index',
-                path: '/advanced/language-lines',
-                component: LanguageLines,
-                meta: {requiresAuth: true, permission: 'view_language_lines', menu: true},
+                name: 'system.translations.index',
+                path: '/advanced/translations',
+                component: Translations,
+                meta: {requiresAuth: true, permission: 'view_translations', menu: true},
+            },
+            {
+                name: 'system.translations.create',
+                path: '/advanced/translations/create',
+                component: ManageTranslation,
+                meta: {requiresAuth: true, permission: 'create_translations'},
+            },
+            {
+                name: 'system.translations.edit',
+                path: '/advanced/translations/:id/edit',
+                component: ManageTranslation,
+                meta: {requiresAuth: true, permission: 'update_translations'},
             },
         ]
     }

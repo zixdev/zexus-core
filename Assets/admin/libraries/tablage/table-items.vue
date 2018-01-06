@@ -14,21 +14,21 @@
             <table-item :item="props.item" :header="header"></table-item>
         </td>
 
-        <table-actions :item="props.item" :headers="headers"></table-actions>
+        <table-item-actions :route="route" :item="props.item" :headers="headers"></table-item-actions>
     </tr>
 </template>
 
 <script>
 
     import Component from "vue-class-component";
-    import TableActions from './table-actions';
+    import TableItemActions from './table-item-actions';
     import TableItem from './table-item';
     import Vue from "vue";
 
     @Component({
-        props: ['props', 'headers'],
+        props: ['props', 'headers', 'route'],
         components: {
-            TableActions,
+            TableItemActions,
             TableItem
         }
     })
