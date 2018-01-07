@@ -25,11 +25,18 @@
         created() {
             this.actions = [
                 {
-                    text: 'table.edit',
+                    text: 'system.sites.edit',
                     color: 'primary',
                     fab: true,
                     icon: 'edit',
                     callback: (item) => this.$router.push({name: 'system.sites.edit', params: {id: item.id}})
+                },
+                {
+                    text: 'system.sites.config.index',
+                    color: 'default',
+                    fab: true,
+                    icon: 'settings',
+                    callback: (item) => this.$router.push({name: 'system.sites.config.index', params: {id: item.id}})
                 },
                 {
                     text: 'table.delete',
@@ -43,7 +50,7 @@
 
             this.headers = [
                 {
-                    text: 'table.name',
+                    text: this.$t('table.name'),
                     value: 'name',
                     align: 'left',
                     editable: true,
@@ -51,25 +58,25 @@
                     sortable: true,
                 },
                 {
-                    text: 'table.url',
+                    text: this.$t('table.url'),
                     value: 'url',
                     editable: true,
                     searchable: true,
                     sortable: true,
                 },
                 {
-                    text: 'table.ui',
+                    text: this.$t('table.ui'),
                     value: 'ui',
                     searchable: true,
                     sortable: true,
                 },
                 {
-                    text: 'table.status',
+                    text: this.$t('table.status'),
                     value: 'status',
                     sortable: true,
                 },
                 {
-                    text: 'table.actions',
+                    text: this.$t('table.actions'),
                     value: 'actions',
                     align: 'right',
                 }

@@ -42,7 +42,7 @@
             ];
             this.headers = [
                 {
-                    text: 'group',
+                    text: this.$t('table.group'),
                     value: 'group',
                     align: 'left',
                     editable: true,
@@ -50,14 +50,14 @@
                     sortable: true,
                 },
                 {
-                    text: 'key',
+                    text: this.$t('table.key'),
                     value: 'key',
                     editable: true,
                     searchable: true,
                     sortable: true,
                 },
                 {
-                    text: 'text',
+                    text: this.$t('table.text'),
                     value: 'text',
                     callback: (data) => {
                         let {default_lang, fallback_lang} = this.$store.state.lang;
@@ -67,7 +67,7 @@
                     sortable: false,
                 },
                 {
-                    text: 'supported_languages',
+                    text: this.$t('table.supported_languages'),
                     callback: (data) => {
                         return Object.keys(data.text).map(lang => {
                             return lang.toUpperCase();
@@ -78,7 +78,7 @@
                 },
 
                 {
-                    text: 'Actions',
+                    text: this.$t('table.ctions'),
                     value: 'actions',
                     align: 'right',
                     searchable: false,

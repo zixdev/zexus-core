@@ -16,7 +16,7 @@
                 <v-text-field
                         v-if="!selected.length"
                         append-icon="search"
-                        label="Search"
+                        :label="$t('table.search')"
                         single-line
                         hide-details
                         v-model="search"
