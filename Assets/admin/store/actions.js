@@ -23,16 +23,10 @@ export default {
     },
 
 
-    setBreadCrumbs({commit}, items) {
+    setBreadCrumbs({commit}, items = []) {
         let routes = ['dashboard.index'];
         items.map(item => routes.push(item));
-        // TODO:: add logic here
-        // each item in items must be object
-        // item = {
-        //     display_text: '',
-        //     route_name: '',
-        //     route_path: '',
-        // };
+
         commit(TYPES.SET_BREADCRUMBS, routes);
     }
 }

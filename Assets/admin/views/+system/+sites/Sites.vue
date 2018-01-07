@@ -22,32 +22,32 @@
     export default class Sites extends Vue {
         headers = [
             {
-                text: 'name',
+                text: 'table.name',
                 value: 'name',
                 align: 'left',
                 searchable: true,
                 sortable: true,
             },
             {
-                text: 'url',
+                text: 'table.url',
                 value: 'url',
 
                 searchable: true,
                 sortable: true,
             },
             {
-                text: 'ui',
+                text: 'table.ui',
                 value: 'ui',
                 searchable: true,
                 sortable: true,
             },
             {
-                text: 'status',
+                text: 'table.status',
                 value: 'status',
                 sortable: true,
             },
             {
-                text: 'Actions',
+                text: 'table.actions',
                 value: 'actions',
                 align: 'right',
             }

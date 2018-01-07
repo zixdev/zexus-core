@@ -2,6 +2,7 @@
     <div>
         <data-table
                 :headers="headers"
+                :actions="actions"
                 api-route="translations"
                 route="system.translations"
         ></data-table>
@@ -19,55 +20,75 @@
         }
     })
     export default class Translations extends Vue {
-        headers = [
-            {
-                text: 'group',
-                value: 'group',
-                align: 'left',
-                searchable: true,
-                sortable: true,
-            },
-            {
-                text: 'key',
-                value: 'key',
 
-                searchable: true,
-                sortable: true,
-            },
-            {
-                text: 'text',
-                value: 'text',
-                callback: (data) => {
-                    let {default_lang, fallback_lang} = this.$store.state.lang;
-                    return (data.text && data.text[default_lang]) ? data.text[default_lang] : data.text[fallback_lang];
-                },
-                searchable: false,
-                sortable: false,
-            },
-            {
-                text: 'supported_languages',
-                callback: (data) => {
-                    return Object.keys(data.text).map(lang => {
-                        return lang.toUpperCase();
-                    }).join(', ');
-                },
-                searchable: false,
-                sortable: false,
-            },
 
-            {
-                text: 'Actions',
-                value: 'actions',
-                align: 'right',
-                searchable: false,
-                sortable: false,
-            }
-        ];
+        created() {
+            this.actions = [
+                {
+                    text: 'table.edit',
+                    color: 'primary',
+                    fab: true,
+                    icon: 'edit',
+                    callback: (item) => this.$router.push({name: 'system.translations.edit', params: {id: item.id}})
+                },
+                {
+                    text: 'table.delete',
+                    color: 'red',
+                    dark: true,
+                    fab: true,
+                    icon: 'delete',
+                    callback: (item) => this.$events.$emit('deleteData', item.id)
+                }
+            ];
+            this.headers = [
+                {
+                    text: 'group',
+                    value: 'group',
+                    align: 'left',
+                    searchable: true,
+                    sortable: true,
+                },
+                {
+                    text: 'key',
+                    value: 'key',
+
+                    searchable: true,
+                    sortable: true,
+                },
+                {
+                    text: 'text',
+                    value: 'text',
+                    callback: (data) => {
+                        let {default_lang, fallback_lang} = this.$store.state.lang;
+                        return (data.text && data.text[default_lang]) ? data.text[default_lang] : data.text[fallback_lang];
+                    },
+                    searchable: false,
+                    sortable: false,
+                },
+                {
+                    text: 'supported_languages',
+                    callback: (data) => {
+                        return Object.keys(data.text).map(lang => {
+                            return lang.toUpperCase();
+                        }).join(', ');
+                    },
+                    searchable: false,
+                    sortable: false,
+                },
+
+                {
+                    text: 'Actions',
+                    value: 'actions',
+                    align: 'right',
+                    searchable: false,
+                    sortable: false,
+                }
+            ];
+        }
 
         mounted() {
-            this.$store.dispatch('setBreadCrumbs', [
-                'system.translations.index'
-            ]);
+            this.$store.dispatch('setBreadCrumbs', ['system.translations.index'])
+
         }
 
     }

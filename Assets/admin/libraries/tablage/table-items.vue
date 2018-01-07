@@ -14,7 +14,7 @@
             <table-item :item="props.item" :header="header"></table-item>
         </td>
 
-        <table-item-actions :route="route" :item="props.item" :headers="headers"></table-item-actions>
+        <table-item-actions :route="route" :item="props.item" :headers="headers" :actions="actions"></table-item-actions>
     </tr>
 </template>
 
@@ -26,7 +26,7 @@
     import Vue from "vue";
 
     @Component({
-        props: ['props', 'headers', 'route'],
+        props: ['props', 'headers', 'route', 'actions'],
         components: {
             TableItemActions,
             TableItem

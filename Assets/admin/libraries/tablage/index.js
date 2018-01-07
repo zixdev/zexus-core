@@ -8,7 +8,6 @@ export default class DataTables extends Vue {
     items = [];
     loading = true;
     selected = [];
-    actions = [];
     pagination = {rowsPerPage: 10};
     eloquent = ['active', 'trashed'];
     //eloquent = [
@@ -19,9 +18,13 @@ export default class DataTables extends Vue {
 
     initTablage(name) {
         this.api_url = name;
-        // this.getUserTableConfig(name); // @TODO: get dynamic table config
+        // this.headers = this.headers.map(header => {
+        //     return {text: this.$t(header.text), ...header}
+        // });
+        // this.getUserTableConfig(name); // @TODO: get dynamic table config + trans
         this.setWatchers();
         this.buildActions();
+
 
         this.getDataFromApi();
     }
@@ -35,7 +38,7 @@ export default class DataTables extends Vue {
                 searchable: !!header.searchable,
                 orderable: !!header.sortable,
                 data: header.value,
-                name: header.text
+                name: header.value
             });
             if (header.value === this.pagination.sortBy) index_sort = i;
             i++;

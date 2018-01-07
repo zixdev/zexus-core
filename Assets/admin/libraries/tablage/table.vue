@@ -2,15 +2,36 @@
     <div>
         <v-card>
             <v-card-title>
-                {{ $t('system.sites.index_title') }}
+                <div v-if="!selected.length">
+                    <v-btn flat color="primary" :to="{name: route+'.create'}" class="text-uppercase">
+                        {{ $t('table.add') }}
+                    </v-btn>
+                </div>
+                <div v-else>
+                    <v-btn class="table__action--btn" flat color="primary">
+                        {{ selected.length }} Items Selected
+                    </v-btn>
+                </div>
                 <v-spacer></v-spacer>
                 <v-text-field
+                        v-if="!selected.length"
                         append-icon="search"
                         label="Search"
                         single-line
                         hide-details
                         v-model="search"
                 ></v-text-field>
+                <div v-else>
+                    <v-btn
+                            v-for="(action, i) in multiple_actions"
+                            :key="i"
+                            :title="action.title"
+                            @click.native="action.callback(selected)"
+                            flat
+                    >
+                        <v-icon>{{ action.icon }}</v-icon>
+                    </v-btn>
+                </div>
             </v-card-title>
             <v-data-table
                     v-model="selected"
@@ -24,11 +45,10 @@
                     class="elevation-1"
             >
                 <template slot="items" slot-scope="props">
-                    <table-items :route="route" :props="props" :headers="headers"></table-items>
+                    <table-items :route="route" :props="props" :headers="headers" :actions="actions"></table-items>
                 </template>
             </v-data-table>
         </v-card>
-        <table-actions></table-actions>
     </div>
 </template>
 
@@ -37,10 +57,8 @@
     import Component from "vue-class-component";
     import DataTable from './index'
     import TableItems from './table-items';
-    import TableActions from './table-actions';
 
     @Component({
-        // props: ['headers', 'route'],
         props: {
             headers: {
                 type: Array,
@@ -55,25 +73,34 @@
                 type: String,
                 required: true
             },
+            actions: {
+                type: Array,
+                required: true,
+                default: []
+            }
         },
         components: {
-            TableItems,
-            TableActions
+            TableItems
         }
     })
     export default class Table extends DataTable {
 
         mounted() {
-            this.initTablage(this.apiRoute)
+            this.initTablage(this.apiRoute);
+
+
+            this.multiple_actions = [
+                {
+                    title: 'delete',
+                    icon: 'delete',
+                    callback: (items) => { // Pluck Delete Selected Rows.
+                        items.map(item => this.deleteData(item.id));
+                        this.selected = [];
+                    }
+                }
+            ]
         }
 
-        /*
-         * Pluck Delete Selected Row.
-         */
-        pluckDelete() {
-            this.selected.map(item => this.deleteData(item.id));
-            this.selected = [];
-        }
 
     }
 </script>

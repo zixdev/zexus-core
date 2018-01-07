@@ -1,12 +1,22 @@
 <template>
     <td v-if="eloquent_status == 'active'" class="text-xs-right">
-        <v-btn small router color="primary"
-               :to="{name: route+'.edit', params: {id: item.id}}">
-            {{$t('table.edit')}}
-        </v-btn>
+        <v-btn v-for="(action, index) in actions"
+               :key="index"
+               :color="action.color"
+               :dark="action.dark"
+               :title="$t(action.text)"
+               @click="action.callback(item)"
+               small
+               :fab="action.fab"
+        >
+            <span v-if="!action.fab">
+                {{ $t(action.text) }}
+            </span>
+            <v-icon :right="!action.fab"
+                    v-if="action.icon">
+                {{action.icon}}
+            </v-icon>
 
-        <v-btn small color="error" @click.native="$events.$emit('deleteData', item.id)">
-            {{$t('table.delete')}}
         </v-btn>
     </td>
     <td v-else>
@@ -25,7 +35,31 @@
     import Vue from "vue";
 
     @Component({
-        props: ['item', 'route']
+        // props: ['item', 'route']
+        props: {
+            route: {
+                required: true,
+                type: String
+            },
+            item: {
+                type: Object,
+                required: true
+            },
+            actions: {
+                required: true,
+                type: Array,
+                default: () => [
+                    {
+                        text: 'table.edit',
+                        color: 'primary',
+                        dark: false,
+                        callback: (item) => {
+                            console.info(item)
+                        }
+                    }
+                ]
+            }
+        }
     })
     export default class TableItemActions extends Vue {
         eloquent_status = 'active';
