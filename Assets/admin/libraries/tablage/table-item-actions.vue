@@ -20,10 +20,10 @@
         </v-btn>
     </td>
     <td v-else>
-        <v-btn small dark error outline v-on:click.native="$events.$emit('forceDeleteData', item.id)">
+        <v-btn small dark error outline v-on:click.native="$events.$emit('table.force-delete-data', item.id)">
             {{$t('table.force-delete')}}
         </v-btn>
-        <v-btn small dark default outline v-on:click.native="$events.$emit('restoreData', item.id)">
+        <v-btn small dark default outline v-on:click.native="$events.$emit('table.restore-data', item.id)">
             {{$t('table.restore')}}
         </v-btn>
     </td>

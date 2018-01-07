@@ -37,7 +37,7 @@
                     dark: true,
                     fab: true,
                     icon: 'delete',
-                    callback: (item) => this.$events.$emit('deleteData', item.id)
+                    callback: (item) => this.$events.$emit('table.delete-data', item.id)
                 }
             ];
             this.headers = [
@@ -45,13 +45,14 @@
                     text: 'group',
                     value: 'group',
                     align: 'left',
+                    editable: true,
                     searchable: true,
                     sortable: true,
                 },
                 {
                     text: 'key',
                     value: 'key',
-
+                    editable: true,
                     searchable: true,
                     sortable: true,
                 },

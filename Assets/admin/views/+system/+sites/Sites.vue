@@ -37,7 +37,7 @@
                     dark: true,
                     fab: true,
                     icon: 'delete',
-                    callback: (item) => this.$events.$emit('deleteData', item.id)
+                    callback: (item) => this.$events.$emit('table.delete-data', item.id)
                 }
             ];
 
@@ -46,13 +46,14 @@
                     text: 'table.name',
                     value: 'name',
                     align: 'left',
+                    editable: true,
                     searchable: true,
                     sortable: true,
                 },
                 {
                     text: 'table.url',
                     value: 'url',
-
+                    editable: true,
                     searchable: true,
                     sortable: true,
                 },

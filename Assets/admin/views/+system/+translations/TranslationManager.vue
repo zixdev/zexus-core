@@ -38,13 +38,13 @@
             </v-card-text>
         </v-card>
         <div>
-                <v-btn color="primary" :loading="$store.state.fetching" type="submit">
-                    <i v-if="$store.state.fetching" class="fa fa-spinner fa-pulse"></i>
-                    {{ edit ? $t('form.edit') : $t('form.create') }}
-                </v-btn>
-                <v-btn type="reset" router :to="{name: 'system.translations.index'}">
-                    {{ $t('form.cancel') }}
-                </v-btn>
+            <v-btn color="primary" :loading="$store.state.fetching" type="submit">
+                <i v-if="$store.state.fetching" class="fa fa-spinner fa-pulse"></i>
+                {{ edit ? $t('form.edit') : $t('form.create') }}
+            </v-btn>
+            <v-btn type="reset" router :to="{name: 'system.translations.index'}">
+                {{ $t('form.cancel') }}
+            </v-btn>
         </div>
     </form>
 </template>
@@ -52,24 +52,23 @@
 <script type="text/babel">
     import Vue from 'vue';
     import Component from 'vue-class-component'
-    import {mapState, mapActions} from 'vuex'
+    import {mapState} from 'vuex'
 
     @Component({
         computed: {
             ...mapState(['messages'])
-        },
-        methods: {
-            ...mapActions(['resetMessages', 'setMessage'])
         }
     })
     export default class TranslationManager extends Vue {
         translation = {text: {}};
 
         mounted() {
-
+            /*
+             * Set Page BreadCrumb
+             */
             this.$store.dispatch('setBreadCrumbs', [
                 'system.translations.index',
-                'system.translations.'+ (this.edit ? 'edit': 'add')
+                'system.translations.' + (this.edit ? 'edit' : 'add')
             ]);
             if (this.edit) {
                 this.$http.get('translations/' + this.$route.params.id).then(response => this.translation = response.data.data);
@@ -77,26 +76,31 @@
         }
 
         save() {
-            this.resetMessages();
-            // if form for create
             return this.edit ? this.update() : this.create();
         }
 
         get edit() {
-            return this.$route.params.id ? true : false;
+            return !!this.$route.params.id;
         }
 
         update() {
-            this.$http.put('translations/' + this.$route.params.id, this.translation)
-                .then(response => {
-                    this.setMessage({type: 'success', message: response.data.message})
-                    this.$router.push({name: 'system.translations.index'});
+            return this.$http.put('translations/' + this.$route.params.id, this.translation).then(response => {
+                this.$events.$emit('notify', {
+                    type: 'info',
+                    title: 'Success !',
+                    message: this.$t('notifications.data.updated_successfully')
                 });
+                this.$router.push({name: 'system.translations.index'});
+            });
         }
 
         create() {
             return this.$http.post('translations', this.translation).then(response => {
-                this.setMessage({type: 'success', message: response.data.message});
+                this.$events.$emit('notify', {
+                    type: 'success',
+                    title: 'Success !',
+                    message: this.$t('notifications.data.created_successfully')
+                });
                 this.$router.push({name: 'system.translations.index'});
             });
         }

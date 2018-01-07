@@ -14,7 +14,7 @@
             </v-container>
         </v-content>
 
-        <app-snack-bar></app-snack-bar>
+        <app-notifications></app-notifications>
         <app-footer></app-footer>
     </v-app>
 </template>
@@ -22,11 +22,11 @@
 <script type="text/babel">
     import Vue from 'vue';
     import Component from 'vue-class-component';
-    import {AppFooter, AppSideBar, AppSnackBar, AppHeader, AppBreadcrumbs} from "@zix-core/admin/components";
+    import {AppFooter, AppSideBar, AppHeader, AppBreadcrumbs, AppNotifications} from "@zix-core/admin/components";
 
     @Component({
         components: {
-            AppHeader, AppFooter, AppSideBar, AppSnackBar, AppBreadcrumbs
+            AppHeader, AppFooter, AppSideBar, AppBreadcrumbs, AppNotifications
         }
     })
     export default class ZixAdmin extends Vue {

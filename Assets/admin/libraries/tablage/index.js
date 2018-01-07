@@ -23,7 +23,7 @@ export default class DataTables extends Vue {
         // });
         // this.getUserTableConfig(name); // @TODO: get dynamic table config + trans
         this.setWatchers();
-        this.buildActions();
+        this.addEventListeners();
 
 
         this.getDataFromApi();
@@ -76,15 +76,14 @@ export default class DataTables extends Vue {
          * On user updated columns
          * updated the current table columns
          */
-        this.$events.$on('update-table-headers', columns => this.headers = columns);
+        this.$events.$on('table.update-headers', columns => this.headers = columns);
     }
 
 
     getDataFromApi() {
-        this.loading = true
+        this.loading = true;
         this.$http.get(this.api_url + this.serialize(this.query))
             .then(res => {
-                console.warn('data ==>', res.data.original);
                 this.items = res.data.original.data;
                 this.totalItems = res.data.original.recordsTotal;
                 this.loading = false
@@ -101,17 +100,49 @@ export default class DataTables extends Vue {
      */
     deleteData(id) {
         this.$http.delete(`${this.api_url}/${id}?action=delete`)
-            .then(res => this.getDataFromApi());
+            .then(res => {
+                this.$events.$emit('notify', {
+                    type: 'warning',
+                    title: 'Warning !',
+                    message: 'Data Was Removed Successfully!' // @TODO: add trans
+                });
+                this.getDataFromApi();
+            });
     }
 
     restoreData(id) {
         this.$http.delete(`${this.api_url}/${id}?action=restore`)
-            .then(res => this.getDataFromApi());
+            .then(res => {
+                this.$events.$emit('notify', {
+                    type: 'success',
+                    title: 'Success !',
+                    message: 'Data Was Restored Successfully!' // @TODO: add trans
+                });
+                this.getDataFromApi();
+            });
     }
 
     forceDeleteData(id) {
         this.$http.delete(`${this.api_url}/${id}?action=force-delete`)
-            .then(res => this.getDataFromApi());
+            .then(res => {
+                this.$events.$emit('notify', {
+                    type: 'error',
+                    title: 'Success !',
+                    message: 'Data Was Permanently Removed!' // @TODO: add trans
+                });
+                this.getDataFromApi();
+            });
+    }
+
+    updateData(item) {
+        this.$http.put(`${this.api_url}/${item.id}`, item)
+            .then(res => {
+                this.$events.$emit('notify', {
+                    type: 'success',
+                    title: 'Success !',
+                    message: 'Data Was Updated Successfully!' // @TODO: add trans
+                });
+            });
     }
 
     getUserTableConfig(key) {
@@ -122,7 +153,6 @@ export default class DataTables extends Vue {
                 this.headers = data.map(column => {
                     return {
                         text: this.$t('table.' + column.value),
-                        // left: (column.align !== 'left'),
                         value: column.value,
                         sortable: column.sortable,
                         searchable: column.searchable
@@ -133,14 +163,24 @@ export default class DataTables extends Vue {
     }
 
 
-
     isObject(val) {
         return val instanceof Object;
     }
 
-    buildActions() {
-        this.$events.$on('deleteData', id => this.deleteData(id));
-        this.$events.$on('forceDeleteData', id => this.forceDeleteData(id));
-        this.$events.$on('restoreData', id => this.restoreData(id));
+    addEventListeners() {
+        // Remove Old Events
+        this.$events.$off('table.reload-data');
+        this.$events.$off('table.delete-data');
+        this.$events.$off('table.update-data');
+        this.$events.$off('table.force-delete-data');
+        this.$events.$off('table.restore-data');
+
+        // add New Events
+        this.$events.$on('table.reload-data', () => this.getDataFromApi());
+        this.$events.$on('table.delete-data', id => this.deleteData(id));
+        this.$events.$on('table.update-data', item => this.updateData(item));
+        this.$events.$on('table.force-delete-data', id => this.forceDeleteData(id));
+        this.$events.$on('table.restore-data', id => this.restoreData(id));
     }
+
 }
