@@ -10,7 +10,7 @@ import  appearance  from './+appearance';
 const Routes = [
     ...home,
     // ...pages,
-    // ...accounts,
+    ...accounts,
     // ...appearance,
     ...system
 ];

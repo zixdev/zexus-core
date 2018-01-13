@@ -29,8 +29,6 @@ class SiteController
     public function index(SiteRequests\SiteShowRequest $request)
     {
         return response()->json(datatables()->of($this->model->query())->make(true));
-//        return new SiteResources\SiteResourceCollection($this->model->paginate(1));
-//        return new SiteResources\SiteResourceCollection(datatables()->of($this->model->query())->make(true));
     }
 
     /**
