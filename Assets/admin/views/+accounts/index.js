@@ -1,5 +1,5 @@
 import {AllUsers, CreateUsers, UserRoles, UserDetails} from './users';
-import {Roles, RoleManager} from './roles';
+import {Roles, RoleManager, Permissions} from './roles';
 
 export default [
     {
@@ -60,6 +60,12 @@ export default [
                 name: 'accounts.roles.edit',
                 path: '/accounts/roles/:id/edit',
                 component: RoleManager,
+                meta: {requiresAuth: true, permission: 'update_roles'},
+            },
+            {
+                name: 'accounts.roles.permissions',
+                path: '/accounts/roles/:id/permissions',
+                component: Permissions,
                 meta: {requiresAuth: true, permission: 'update_roles'},
             },
         ]

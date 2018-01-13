@@ -11,4 +11,7 @@ Route::group(['middleware' => ['api']], function ($router) {
     $router->put('roles/{role}', 'RoleController@update');
 
     $router->delete('roles/{role}', 'RoleController@destroy');
+
+
+    $router->get('permissions', 'PermissionController@index');
 });

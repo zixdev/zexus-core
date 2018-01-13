@@ -27,7 +27,7 @@ class PermissionController
      */
     public function index(PermissionRequests\PermissionShowRequest $request)
     {
-        return new PermissionResources\PermissionResourceCollection(datatables()->of($this->model->query()));
+        return new PermissionResources\PermissionResourceCollection($this->model->all());
     }
 
     /**

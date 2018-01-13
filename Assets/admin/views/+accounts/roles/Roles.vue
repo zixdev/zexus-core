@@ -31,6 +31,13 @@
                     icon: 'edit',
                     callback: (item) => this.$router.push({name: 'accounts.roles.edit', params: {id: item.id}})
                 },
+                {
+                    text: 'accounts.roles.permissions',
+                    color: 'default',
+                    fab: true,
+                    icon: 'settings_input_component',
+                    callback: (item) => this.$router.push({name: 'accounts.roles.permissions', params: {id: item.id}})
+                },
 
                 {
                     text: 'table.delete',

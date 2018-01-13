@@ -2,16 +2,16 @@
 
 namespace Zix\Core\Models;
 
-use Zix\Core\Models\BaseModel;
+use Spatie\Permission\Models\Permission as SpatiePermission;
 
 /**
  * Class Permission
  * @package Zix\Core\Models
  */
-class Permission extends BaseModel
+class Permission extends SpatiePermission
 {
     /**
      * @var array
      */
-    protected $fillable = [];
+    protected $fillable = ['name', 'guard_name'];
 }
