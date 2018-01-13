@@ -4,6 +4,7 @@ namespace Zix\Core\Models;
 
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Spatie\Permission\Traits\HasRoles;
 use Zix\Core\Models\Traits\UuidModelTrait;
 
 /**
@@ -12,7 +13,7 @@ use Zix\Core\Models\Traits\UuidModelTrait;
  */
 class BaseUser extends Authenticatable
 {
-    use UuidModelTrait, Notifiable;
+    use UuidModelTrait, Notifiable, HasRoles;
 
     /**
      * The attributes that are mass assignable.

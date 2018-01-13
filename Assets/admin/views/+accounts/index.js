@@ -1,4 +1,5 @@
 import {AllUsers, CreateUsers, UserRoles, UserDetails} from './users';
+import {Roles, RoleManager} from './roles';
 
 export default [
     {
@@ -7,6 +8,9 @@ export default [
         component: AllUsers,
         meta: {requiresAuth: true, permission: 'view_users', icon: 'person', menu: true},
         children: [
+            /*
+             * User Management
+             */
             {
                 name: 'accounts.users.index',
                 path: '/accounts',
@@ -35,6 +39,27 @@ export default [
                 name: 'accounts.users.roles',
                 path: '/accounts/:id/roles',
                 component: UserRoles,
+                meta: {requiresAuth: true, permission: 'update_roles'},
+            },
+            /*
+             * Roles Managements
+             */
+            {
+                name: 'accounts.roles.index',
+                path: '/accounts/roles',
+                component: Roles,
+                meta: {requiresAuth: true, permission: 'view_roles', menu: true},
+            },
+            {
+                name: 'accounts.roles.create',
+                path: '/accounts/roles/create',
+                component: RoleManager,
+                meta: {requiresAuth: true, permission: 'create_roles'},
+            },
+            {
+                name: 'accounts.roles.edit',
+                path: '/accounts/roles/:id/edit',
+                component: RoleManager,
                 meta: {requiresAuth: true, permission: 'update_roles'},
             },
         ]
