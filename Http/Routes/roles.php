@@ -9,6 +9,7 @@ Route::group(['middleware' => ['api']], function ($router) {
     $router->post('roles', 'RoleController@store');
 
     $router->put('roles/{role}', 'RoleController@update');
+    $router->post('roles/{role}/permissions', 'RoleController@updatePermissions');
 
     $router->delete('roles/{role}', 'RoleController@destroy');
 

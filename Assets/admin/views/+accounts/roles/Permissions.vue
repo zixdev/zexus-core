@@ -1,24 +1,45 @@
 <template>
-    <div>
-        <v-data-table
-                v-bind:headers="headers"
-                :items="permissions"
-                hide-actions
-                class="elevation-1"
-        >
-            <template slot="items" slot-scope="props">
-                <td>{{props.item.toUpperCase()}}</td>
-                <td class="text-xs-right" v-for="action in actions">
-                    <v-switch right
-                              v-model="user_permissions[action + '_' + props.item]"
-                              color="primary"
-                              :value="action + '_' + props.item"
-                              hide-details></v-switch>
-                </td>
+    <form @submit.prevent="save()">
+        <v-card class="mb-3">
+            <v-card-title>
+                <span>
+                    To pluck select click on the permissions type*
+                </span>
+                <v-spacer></v-spacer>
+                <v-text-field
+                        append-icon="search"
+                        :label="$t('table.search')"
+                        single-line
+                        hide-details
+                        v-model="search"
+                ></v-text-field>
+            </v-card-title>
+            <v-data-table
+                    :headers="headers"
+                    :items="permissions"
+                    :search="search"
+                    :pagination.sync="pagination"
+                    :custom-filter="searchPermissions"
+            >
+                <template slot="items" slot-scope="props">
+                    <td @click="toggleSelect(props.item)">{{props.item.toUpperCase()}}</td>
+                    <td class="text-xs-right" v-for="action in actions">
+                        <v-switch v-model="user_permissions[action + '_' + props.item]"
+                                  color="primary"></v-switch>
+                    </td>
+                </template>
+            </v-data-table>
+        </v-card>
 
-            </template>
-        </v-data-table>
-    </div>
+
+        <v-btn color="primary" :loading="$store.state.fetching" type="submit">
+            <i v-if="$store.state.fetching" class="fa fa-spinner fa-pulse"></i>
+            {{ edit ? $t('form.edit') : $t('form.create') }}
+        </v-btn>
+        <v-btn type="reset" router :to="{name: 'accounts.roles.index'}">
+            {{ $t('form.cancel') }}
+        </v-btn>
+    </form>
 </template>
 
 <script type="text/babel">
@@ -32,37 +53,26 @@
         }
     })
     export default class Permissions extends Vue {
+        pagination = {
+            rowsPerPage: 10
+        };
+        search = '';
         role = {};
-        user_permissions = {"view_sites": "view_sites"};
-
-
+        user_permissions = {};
         guards = [];
         actions = [];
         permissions = [];
-        // role: [];
         headers = [
             {
                 text: 'Type',
                 align: 'left',
-                sortable: false,
-                value: 'name'
+                value: ''
             },
             {text: 'View', value: 'view', align: 'left', sortable: false},
             {text: 'Create', value: 'create', align: 'left', sortable: false},
             {text: 'Update', value: 'update', align: 'left', sortable: false},
             {text: 'Delete', value: 'delete', align: 'left', sortable: false}
         ];
-        items = [
-            {
-                value: false,
-                name: 'Frozen Yogurt',
-                calories: 159,
-                fat: 6.0,
-                carbs: 24,
-                protein: 4.0,
-
-            }
-        ]
 
         mounted() {
             /*
@@ -99,14 +109,49 @@
                         return self.indexOf(name) === index;
                     });
                 })
-            // this.$http.get('roles/' + this.$route.params.id).then(response => this.role = response.data.data);
+                .then(response => this.$http.get('roles/' + this.$route.params.id)
+                    .then(response => {
+                        let role = response.data.data;
+                        let user_permissions = {};
+                        if (role.permissions.length) {
+                            role.permissions.map(permission => {
+                                user_permissions[permission.name] = true;
+                            });
+                        }
+                        this.user_permissions = user_permissions;
+                    }));
         }
-
 
         get edit() {
             return !!this.$route.params.id;
         }
 
+        save() {
+            this.$http.post('roles/' + this.$route.params.id + '/permissions', this.user_permissions)
+                .then(res => {
+                    this.$events.$emit('notify', {
+                        type: 'info',
+                        title: 'Success !',
+                        message: this.$t('notifications.data.updated_successfully')
+                    });
+                    this.$router.push({name: 'accounts.roles.index'})
+                });
+        }
 
+        searchPermissions(items, search, filter, headers) {
+            return items.filter(item => item.includes(search))
+        }
+
+        toggleSelect(permission) {
+            let user_permissions = this.user_permissions;
+
+            this.actions.map(action => {
+                user_permissions[action + '_' + permission] = true;
+            });
+            this.$nextTick(() => {
+                this.user_permissions = user_permissions;
+                this.$forceUpdate();
+            });
+        }
     }
 </script>

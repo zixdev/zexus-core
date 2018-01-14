@@ -23,6 +23,10 @@ class AppPermissionsCreateListener
             ->push('sites')
             ->push('configs')
             ->push('users')
-            ->push('roles');
+            ->push('roles')
+            ->push('pages')
+            ->push('menus')
+            ->push('seo')
+            ->push('tags');
     }
 }

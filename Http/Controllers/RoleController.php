@@ -4,6 +4,7 @@ use Zix\Core\Models;
 use Zix\Core\Http\Resources\Role as RoleResources;
 //use Zix\Core\Events\Role as RoleEvents;
 use Zix\Core\Http\Requests\Role as RoleRequests;
+use Zix\Core\Http\Requests\Permission as PermissionRequests;
 
 /**
  * Class RoleController
@@ -28,7 +29,7 @@ class RoleController
      */
     public function index(RoleRequests\RoleShowRequest $request)
     {
-        return response()->json(datatables()->of($this->model->query())->make(true));
+        return response()->json(datatables()->of($this->model->with('permissions'))->make(true));
     }
 
     /**
@@ -59,7 +60,7 @@ class RoleController
     /**
      * Update the specified resource in storage.
      *
-     * @param  Models\Role  $role
+     * @param  Models\Role $role
      * @param  RoleRequests\RoleUpdateRequest $request
      * @return RoleResources\RoleResource
      */
@@ -82,5 +83,26 @@ class RoleController
         $role->delete();
 
         return new RoleResources\RoleResource($role);
+    }
+
+    /**
+     * @param PermissionRequests\PermissionUpdateRequest $request
+     * @param Models\Role $role
+     * @return RoleResources\RoleResource
+     */
+    public function updatePermissions(PermissionRequests\PermissionUpdateRequest $request, Models\Role $role)
+    {
+        return new RoleResources\RoleResource($role->syncPermissions($this->getRequestPermissionsKeys($request)));
+    }
+
+    /**
+     * @param PermissionRequests\PermissionUpdateRequest $request
+     * @return static
+     */
+    private function getRequestPermissionsKeys(PermissionRequests\PermissionUpdateRequest $request)
+    {
+        return collect($request->input())->filter(function ($permission) {
+            return $permission;
+        })->keys();
     }
 }

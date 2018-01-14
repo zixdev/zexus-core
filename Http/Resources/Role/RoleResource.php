@@ -14,6 +14,11 @@ class RoleResource extends Resource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'name' => $this->name,
+            'guard_name' => $this->guard_name,
+            'permissions' => $this->permissions,
+        ];
     }
 }
