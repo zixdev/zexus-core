@@ -33,7 +33,7 @@
     })
     export default class Permissions extends Vue {
         role = {};
-        user_permissions = {};
+        user_permissions = {"view_sites": "view_sites"};
 
 
         guards = [];
