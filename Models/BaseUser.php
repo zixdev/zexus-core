@@ -32,4 +32,6 @@ class BaseUser extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    protected $guard_name = 'api';
 }

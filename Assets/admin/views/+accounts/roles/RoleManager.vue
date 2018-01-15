@@ -11,15 +11,6 @@
                         autofocus
                         required
                 ></v-text-field>
-                 <v-text-field
-                        name="role_guard_name"
-                        :label="$t('table.guard_name')"
-                        v-model="role.guard_name"
-                        :rules="messages.validation.guard_name"
-                        autofocus
-                        required
-                ></v-text-field>
-
 
             </v-card-text>
         </v-card>
@@ -44,7 +35,7 @@
         }
     })
     export default class RoleManager extends Vue {
-        role = {};
+        role = {guard_name: 'api'};
 
         mounted() {
             /*

@@ -27,7 +27,10 @@
                         :label="$t('table.user_roles')"
                         class="input-group--focused"
                         item-text="name"
+                        item-value="id"
+                        return-object
                         multiple
+                        chips
                 ></v-select>
                 <div v-if="!edit">
                     <v-text-field

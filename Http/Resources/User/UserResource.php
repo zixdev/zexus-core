@@ -14,6 +14,11 @@ class UserResource extends Resource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'username' => $this->username,
+            'email' => $this->email,
+            'roles' => $this->roles,
+        ];
     }
 }

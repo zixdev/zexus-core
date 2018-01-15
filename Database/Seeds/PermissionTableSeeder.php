@@ -15,7 +15,7 @@ class PermissionTableSeeder extends Seeder
     {
         $permissions = collect();
         $actions = collect(['view', 'create', 'update', 'delete']);
-        
+
         event(new GetAppPermissions($permissions));
 
         $this->createPermissions($permissions, $actions);
@@ -25,18 +25,15 @@ class PermissionTableSeeder extends Seeder
      * @param $permissions
      * @param $actions
      */
-    private function createPermissions($permissions, $actions): void
+    private function createPermissions($permissions, $actions)
     {
         $permissions->map(function ($permission) use ($actions) {
             $actions->map(function ($action) use ($permission) {
                 Permission::create([
                     'name' => $action . '_' . $permission,
-                    'guard_name' => 'admin'
+                    'guard_name' => 'api'
                 ]);
-                Permission::create([
-                    'name' => $action . '_' . $permission,
-                    'guard_name' => 'web'
-                ]);
+
             });
         });
     }
