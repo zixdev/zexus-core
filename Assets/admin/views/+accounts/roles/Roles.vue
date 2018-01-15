@@ -68,9 +68,8 @@
                 {
                     text: this.$t('table.total_permissions'),
                     callback: data => data.permissions.length,
-                    editable: true,
-                    searchable: true,
-                    sortable: true,
+                    searchable: false,
+                    sortable: false,
                 },
                 {
                     text: this.$t('table.actions'),

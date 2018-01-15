@@ -1,7 +1,7 @@
 <?php namespace Zix\Core\Database\Seeds;
 
 use Illuminate\Database\Seeder;
-use Zix\Core\Events\Seeder\AppPermissionsCreate;
+use Zix\Core\Events\Seeder\GetAppPermissions;
 use Zix\Core\Models\Permission;
 
 class PermissionTableSeeder extends Seeder
@@ -15,8 +15,18 @@ class PermissionTableSeeder extends Seeder
     {
         $permissions = collect();
         $actions = collect(['view', 'create', 'update', 'delete']);
-        event(new AppPermissionsCreate($permissions));
+        
+        event(new GetAppPermissions($permissions));
 
+        $this->createPermissions($permissions, $actions);
+    }
+
+    /**
+     * @param $permissions
+     * @param $actions
+     */
+    private function createPermissions($permissions, $actions): void
+    {
         $permissions->map(function ($permission) use ($actions) {
             $actions->map(function ($action) use ($permission) {
                 Permission::create([

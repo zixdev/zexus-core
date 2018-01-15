@@ -26,7 +26,7 @@ class UserController
      */
     public function index(UserRequests\UserShowRequest $request)
     {
-        return response()->json(datatables()->of($this->model->query())->make(true));
+        return datatables()->eloquent($this->model->query())->toJson();
     }
 
     /**
@@ -67,6 +67,11 @@ class UserController
     public function update(UserRequests\UserUpdateRequest $request, User $user)
     {
         $user->update($request->input());
+
+        $user->roles()->detach();
+        collect($request->get('roles'))->map(function ($role) use ($user) {
+            $user->assignRole($role['name']);
+        });
         //event(new UserEvents\UserUpdatedEvent($user));
 
         return new UserResources\UserResource($user);

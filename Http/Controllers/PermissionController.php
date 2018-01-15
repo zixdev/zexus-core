@@ -27,7 +27,7 @@ class PermissionController
      */
     public function index(PermissionRequests\PermissionShowRequest $request)
     {
-        return new PermissionResources\PermissionResourceCollection($this->model->all());
+        return datatables()->eloquent($this->model->query())->toJson();
     }
 
     /**

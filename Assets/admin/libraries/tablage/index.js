@@ -84,8 +84,8 @@ export default class DataTables extends Vue {
         this.loading = true;
         this.$http.get(this.api_url + this.serialize(this.query))
             .then(res => {
-                this.items = res.data.original.data;
-                this.totalItems = res.data.original.recordsTotal;
+                this.items = res.data.data;
+                this.totalItems = res.data.recordsTotal;
                 this.loading = false
             })
 

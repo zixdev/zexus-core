@@ -26,7 +26,7 @@ class RoleUpdateRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'max:255', Rule::unique('roles')->where('guard_name', $this->guard_name)->ignore($this->id)],
-            'guard_name' => ['required', Rule::in('admin', 'web')]
+            'guard_name' => ['required', Rule::in('api', 'web')]
         ];
     }
 }

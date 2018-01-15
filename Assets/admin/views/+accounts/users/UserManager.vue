@@ -21,6 +21,14 @@
                         minlength="3"
                         maxlength="255"
                 ></v-text-field>
+                <v-select
+                        :items="roles"
+                        v-model="user.roles"
+                        :label="$t('table.user_roles')"
+                        class="input-group--focused"
+                        item-text="name"
+                        multiple
+                ></v-select>
                 <div v-if="!edit">
                     <v-text-field
                             name="password"
@@ -66,8 +74,9 @@
     @Component({
         computed: mapState(['messages'])
     })
-    export default class CreateUser extends Vue {
+    export default class UserManager extends Vue {
         user = {};
+        roles = [];
 
         mounted() {
             /*
@@ -80,6 +89,8 @@
             if (this.edit) {
                 this.$http.get('users/' + this.$route.params.id).then(response => this.user = response.data.data);
             }
+
+            this.$http.get('roles').then(response => this.roles = response.data.data);
         }
 
         get edit() {
@@ -113,6 +124,8 @@
                 this.$router.push({name: 'accounts.users.index'});
             });
         }
+
+
 
     }
 </script>

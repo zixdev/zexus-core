@@ -12,4 +12,6 @@ use Zix\Core\Models\Traits\UuidModelTrait;
 class BaseModel extends Model
 {
     use UuidModelTrait;
+
+    protected $guard_name = 'api';
 }

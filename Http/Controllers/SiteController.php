@@ -24,11 +24,10 @@ class SiteController
     /**
      * @param SiteRequests\SiteShowRequest $request
      * @return SiteResources\SiteResourceCollection
-     * @throws \Exception
      */
     public function index(SiteRequests\SiteShowRequest $request)
     {
-        return response()->json(datatables()->of($this->model->query())->make(true));
+        return datatables()->eloquent($this->model->query())->toJson();
     }
 
     /**

@@ -27,11 +27,10 @@ class TranslationController
     /**
      * @param TranslationRequests\TranslationShowRequest $request
      * @return \Illuminate\Http\JsonResponse
-     * @throws \Exception
      */
     public function index(TranslationRequests\TranslationShowRequest $request)
     {
-        return response()->json(datatables()->of($this->model->query())->make(true));
+        return datatables()->eloquent($this->model->query())->toJson();
     }
 
     /**

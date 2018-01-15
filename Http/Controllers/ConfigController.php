@@ -27,7 +27,7 @@ class ConfigController
      */
     public function index(ConfigRequests\ConfigShowRequest $request)
     {
-        return new ConfigResources\ConfigResourceCollection(datatables()->of($this->model->query()));
+        return datatables()->eloquent($this->model->query())->toJson();
     }
 
     /**

@@ -25,11 +25,10 @@ class RoleController
     /**
      * @param RoleRequests\RoleShowRequest $request
      * @return RoleResources\RoleResourceCollection
-     * @throws \Exception
      */
     public function index(RoleRequests\RoleShowRequest $request)
     {
-        return response()->json(datatables()->of($this->model->with('permissions'))->make(true));
+        return datatables()->eloquent($this->model->with('permissions'))->toJson();
     }
 
     /**

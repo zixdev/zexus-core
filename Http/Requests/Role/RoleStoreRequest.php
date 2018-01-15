@@ -26,7 +26,7 @@ class RoleStoreRequest extends FormRequest
     {
         return [
             'name' => ['required', 'min:3', 'max:255', Rule::unique('roles')->where('guard_name', $this->guard_name)],
-            'guard_name' => ['required', Rule::in('admin', 'web')]
+            'guard_name' => ['required', Rule::in('api', 'web')]
         ];
     }
 }
