@@ -1,5 +1,7 @@
 <template>
-    <v-footer class="l-footer elevation-1" app>
+    <v-footer class="l-footer elevation-1"
+              :fixed="$store.state.sidebar.clipped"
+              app>
         <v-container fluid>
             <v-layout class="l-footer__copy_write">
                 <v-flex md6 v-html="rights"></v-flex>

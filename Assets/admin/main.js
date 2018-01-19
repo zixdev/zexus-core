@@ -6,17 +6,17 @@ import { sync } from 'vuex-router-sync';
  * This is the Vuex store and it is
  * avaible to all your components
  */
-import store from './store'
+import store from './store';
 
 /**
  * This is the Router
  */
-import router from './router'
+import router from './router';
 
 /**
  * $http plugin based on axios
  */
-import httpPlugin from './plugins/http'
+import httpPlugin from './plugins/http';
 
 /**
  * Make $http avaible to all components
@@ -30,10 +30,10 @@ Vue.use(httpPlugin, { store, router });
 import i18n from './lang'
 
 // Effortlessly keep vue-router and vuex store in sync.
-sync(store, router) // https://github.com/vuejs/vuex-router-sync/tree/next
+sync(store, router); // https://github.com/vuejs/vuex-router-sync/tree/next
 
 
-Vue.config.productionTip = false
+Vue.config.productionTip = false;
 /* eslint-disable no-new */
 new Vue({
     el: '#zix-admin',

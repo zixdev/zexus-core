@@ -1,9 +1,10 @@
 <template>
     <v-navigation-drawer class="l-sidebar "
                          fixed
-                         clipped
                          app
-                         v-model="_sidebar">
+                         :mini-variant="$store.state.sidebar.mini_variant"
+                         :clipped="$store.state.sidebar.clipped"
+                         v-model="$store.state.sidebar.show">
         <v-list dense>
             <template v-for="(item,i) in router">
                 <v-list-group v-if="item.children" no-action>
@@ -76,7 +77,7 @@
         padding-top: 20px;
     }
 
-    .list--group__container > .list.list--group  > li .list__tile__title{
+    .list--group__container > .list.list--group > li .list__tile__title {
         padding-left: 57px;
     }
 </style>

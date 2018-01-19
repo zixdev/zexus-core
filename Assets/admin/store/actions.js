@@ -21,6 +21,12 @@ export default {
     toggleSidebar({commit}) {
         commit(TYPES.TOGGLE_SIDEBAR);
     },
+    toggleSidebarClipped({commit}) {
+        commit(TYPES.TOGGLE_SIDEBAR_CLIPPED);
+    },
+    toggleSidebarMiniVariant({commit}) {
+        commit(TYPES.TOGGLE_SIDEBAR_MINI_VARIANT);
+    },
 
 
     setBreadCrumbs({commit}, items = []) {
@@ -28,5 +34,8 @@ export default {
         items.map(item => routes.push(item));
 
         commit(TYPES.SET_BREADCRUMBS, routes);
+    },
+    setLang({commit}, lang = 'en') {
+        console.warn(lang)
     }
 }

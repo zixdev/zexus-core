@@ -2,9 +2,15 @@
     <v-toolbar class="l-header__top"
                app
                color="primary"
-               clipped-left
+               :clipped-left="$store.state.sidebar.clipped"
                fixed>
-        <v-toolbar-side-icon @click.native.stop="toggleSidebar()"/>
+        <v-toolbar-side-icon @click.native.stop="toggleSidebar()"></v-toolbar-side-icon>
+        <v-btn icon @click.native.stop="toggleSidebarMiniVariant()">
+            <v-icon v-html="$store.state.sidebar.mini_variant ? 'chevron_right' : 'chevron_left'"></v-icon>
+        </v-btn>
+        <v-btn icon @click.native.stop="toggleSidebarClipped()">
+            <v-icon>web</v-icon>
+        </v-btn>
         <v-toolbar-title>ZIX DEV</v-toolbar-title>
 
 
@@ -49,7 +55,7 @@
     import {mapGetters, mapActions} from 'vuex';
 
     @Component({
-        methods: mapActions(['toggleSidebar'])
+        methods: mapActions(['toggleSidebar', 'toggleSidebarClipped', 'toggleSidebarMiniVariant', 'setLang'])
     })
     export default class Header extends Vue {
         mounted() {

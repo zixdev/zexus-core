@@ -9,7 +9,11 @@ export default {
         validation: {}
     },
     fetching: false,
-    sidebar: true,
+    sidebar: {
+        show: true,
+        clipped: false,
+        mini_variant: false
+    },
     app_name: 'ZIX DEV',
 
     lang: {

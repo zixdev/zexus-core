@@ -1,14 +1,14 @@
 <template>
     <v-layout>
         <v-flex md4>
-            <v-card>
+            <v-card class="ma-2">
                 <v-card-title>
                     Users
                 </v-card-title>
             </v-card>
         </v-flex>
         <v-flex md4>
-            <v-card>
+            <v-card class="ma-2">
                 <v-card-title>
                     Pages
                 </v-card-title>

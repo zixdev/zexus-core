@@ -13,7 +13,7 @@
     <title>{{ config('app.name', 'Zix Admin Panel') }}</title>
 
     <!-- Styles -->
-    <link href="{{ mix('assets/admin/css/app.css') }}" rel="stylesheet">
+    <link href="{{ mix('admin/css/app.css') }}" rel="stylesheet">
 
     <!-- Scripts -->
     <script>
@@ -31,6 +31,6 @@
 <div id="zix-admin"></div>
 
 <!-- Scripts -->
-<script src="{{ mix('assets/admin/js/app.js') }}"></script>
+<script src="{{ mix('admin/js/app.js') }}"></script>
 </body>
 </html>
