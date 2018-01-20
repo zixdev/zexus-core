@@ -13,9 +13,11 @@ export default {
         state.sidebar.show = !state.sidebar.show;
     },
     [TYPES.TOGGLE_SIDEBAR_CLIPPED](state) {
+        state.sidebar.show = true;
         state.sidebar.clipped = !state.sidebar.clipped;
     },
     [TYPES.TOGGLE_SIDEBAR_MINI_VARIANT](state) {
+        state.sidebar.show = true;
         state.sidebar.mini_variant = !state.sidebar.mini_variant;
     },
     [TYPES.SET_BREADCRUMBS](state, items) {

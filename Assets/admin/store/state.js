@@ -11,7 +11,7 @@ export default {
     fetching: false,
     sidebar: {
         show: true,
-        clipped: false,
+        clipped: true,
         mini_variant: false
     },
     app_name: 'ZIX DEV',

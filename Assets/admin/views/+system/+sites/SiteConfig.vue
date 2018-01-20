@@ -1,67 +1,64 @@
 <template>
-    <v-tabs
-            id="mobile-tabs-1"
-            grow
-            light
-            scroll-bars
-            v-bind:model="active"
-            >
-        <v-tabs-bar slot="activators">
-            <v-tabs-slider></v-tabs-slider>
-            <v-tabs-item
-                    v-for="(tab, i) in tabs" :key="i"
-                    v-bind:href="'#config-tab-' + i"
-                    :title="tab.name"
-            >
-                <v-icon>{{ tab.icon }}</v-icon>
-            </v-tabs-item>
-        </v-tabs-bar>
+    <div>
+        <v-tabs v-model="active">
 
-        <v-tabs-content id="config-tab-0">
-            <v-card-text>
-                <general></general>
-            </v-card-text>
-        </v-tabs-content>
-        <v-tabs-content id="config-tab-1">
-            <v-card-text>
-                <security></security>
-            </v-card-text>
-        </v-tabs-content>
-        <v-tabs-content id="config-tab-2">
-            <v-card-text>
-                <s-e-o></s-e-o>
-            </v-card-text>
-        </v-tabs-content>
-        <v-tabs-content id="config-tab-3">
-            <v-card-text>
-                <email-settings></email-settings>
-            </v-card-text>
-        </v-tabs-content>
-        <v-tabs-content id="config-tab-4">
-            <v-card-text>
-                <social-api></social-api>
-            </v-card-text>
-        </v-tabs-content>
-        <v-tabs-content id="config-tab-5">
-            <v-card-text>
-                <maintenance></maintenance>
-            </v-card-text>
-        </v-tabs-content>
+            <v-card>
+                <v-tabs-bar dark>
+                    <v-tabs-item
+                            v-for="tab in tabs"
+                            :key="tab.name"
+                            :href="'#' + tab.name"
+                    >
+                        <v-icon>{{tab.icon}}</v-icon> &nbsp; &nbsp;
+                        {{ tab.name }}
+                    </v-tabs-item>
+                    <v-tabs-slider color="primary"></v-tabs-slider>
+                </v-tabs-bar>
+                <v-card-text>
+                    <v-tabs-items>
+                        <v-tabs-content id="General">
+                            <General></General>
+                        </v-tabs-content>
+                        <v-tabs-content id="EmailContact">
+                            <EmailContact></EmailContact>
+                        </v-tabs-content>
+                        <v-tabs-content id="EmailSettings">
+                            <EmailSettings></EmailSettings>
+                        </v-tabs-content>
+                        <v-tabs-content id="Maintenance">
+                            <Maintenance></Maintenance>
+                        </v-tabs-content>
+                        <v-tabs-content id="Security">
+                            <Security></Security>
+                        </v-tabs-content>
+                        <v-tabs-content id="SEO">
+                            <SEO></SEO>
+                        </v-tabs-content>
+                        <v-tabs-content id="SocialApi">
+                            <SocialApi></SocialApi>
+                        </v-tabs-content>
 
-    </v-tabs>
+                    </v-tabs-items>
+                </v-card-text>
+            </v-card>
+
+        </v-tabs>
+
+    </div>
 </template>
 
 <script type="text/babel">
     import Vue from 'vue';
     import Component from 'vue-class-component'
     import {EmailContact, EmailSettings, General, Maintenance, Security, SEO, SocialApi} from './components';
+
     @Component({
         components: {
             EmailContact, EmailSettings, General, Maintenance, Security, SEO, SocialApi
         }
     })
     export default class SiteConfig extends Vue {
-        active = '';
+        active = null;
         config = {};
         tabs = [
             {
@@ -91,18 +88,32 @@
         ];
 
         mounted() {
+            /*
+            * Set Page BreadCrumb
+            */
+            this.$store.dispatch('setBreadCrumbs', [
+                'system.sites.index',
+                'system.sites.' + (this.edit ? 'edit' : 'add'),
+                'system.sites.config',
+            ]);
             this.loadConfig();
         }
 
         loadConfig() {
             this.$http.get('sites/' + this.$route.params.id + '/config')
-                    .then(response => {
-                        let data = response.data;
-                        data.map(config => {
-                            this.config[config.key] = config.value;
-                        });
-                        this.$events.$emit('site-update-config', this.config);
+                .then(response => {
+                    let data = response.data.data;
+                    let configs = {};
+                    data.configs.map(config => {
+                        configs[config.key] = config.value;
                     });
+                    this.config = configs;
+                    this.$events.$emit('site.set.configs', configs);
+                });
+        }
+
+        get edit() {
+            return !!this.$route.params.id;
         }
 
     }
