@@ -35,7 +35,6 @@
     import Vue from "vue";
 
     @Component({
-        // props: ['item', 'route']
         props: {
             route: {
                 required: true,

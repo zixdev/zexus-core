@@ -15,23 +15,12 @@
 <script type="text/babel">
     import Vue from 'vue';
     import Component from 'vue-class-component';
-    import {mapGetters, mapActions} from 'vuex';
+    import {mapActions} from 'vuex';
 
     @Component({
         methods: mapActions(['toggleSidebar'])
     })
     export default class Breadcrumbs extends Vue {
-
-        breads = [
-            'dashboard.index',
-            'system.translations.index',
-            'system.translations.edit'
-        ];
-
-        mounted() {
-
-        }
-
 
     }
 </script>
